@@ -162,9 +162,9 @@ body::before {
 }
 
 .inline-link:hover {
-    color: rgba(255, 255, 255, 0.95);
-    border-color: rgba(255, 255, 255, 0.95);
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.85);
+    border-color: rgba(255, 255, 255, 0.7);
+    opacity: 0.85;
 }
 
 .inline-link::after {
@@ -290,59 +290,7 @@ body::before {
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
 }
 
-.preview-popup {
-    position: fixed;
-    pointer-events: none;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    padding: 1rem;
-    width: 400px;
-    height: 300px;
-    z-index: 1000;
-    overflow: hidden;
-}
-
-.preview-popup.visible {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: none;
-}
-
-.preview-popup iframe {
-    width: 200%;
-    height: 200%;
-    border: none;
-    transform: scale(0.5);
-    transform-origin: 0 0;
-    background: transparent;
-    pointer-events: none;
-}
-
-.preview-popup img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    margin-bottom: 0.5rem;
-    border-radius: 2px;
-}
-
-.preview-popup .preview-title {
-    font-family: 'Rockwell-Bold', 'Rockwell Bold', serif;
-    color: var(--accent-color);
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-}
-
-.preview-popup .preview-description {
-    font-size: 0.8rem;
-    color: var(--text-color);
-    line-height: 1.4;
-}
+/* Preview popup styles removed */
 
 .social-links {
     display: flex;
