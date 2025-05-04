@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essays - shefali</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="essays.css">
+</head>
+<body class="essays-page">
+    <main class="essays-container">
+        <header class="essays-header">
+            <h1 class="title">essays</h1>
+            <button class="nav-button back-button" onclick="window.location.href='index.html'">← back to main</button>
+        </header>
+        
+        <div class="essays-grid">
+            <article class="essay-preview">
+                <h2 class="essay-title">On the Nature of Digital Memory</h2>
+                <div class="essay-meta">May 2025</div>
+                <p class="essay-excerpt">
+                    Exploring the ephemeral nature of digital artifacts and how they shape our understanding of permanence in the modern age.
+                </p>
+                <a href="essays/digital-memory.html" class="read-more">read more →</a>
+            </article>
+
+            <article class="essay-preview">
+                <h2 class="essay-title">The Silent Language of Light</h2>
+                <div class="essay-meta">April 2025</div>
+                <p class="essay-excerpt">
+                    Observations on how natural light shapes our perception of space and time.
+                </p>
+                <a href="essays/silent-language.html" class="read-more">read more →</a>
+            </article>
+
+            <article class="essay-preview">
+                <h2 class="essay-title">Fragments of Code</h2>
+                <div class="essay-meta">March 2025</div>
+                <p class="essay-excerpt">
+                    Reflections on the poetry found in programming languages and the art of writing software.
+                </p>
+                <a href="essays/code-fragments.html" class="read-more">read more →</a>
+            </article>
+        </div>
+    </main>
+    <div class="grain-overlay"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const bgResponse = await fetch('/api/image/DSC02811_burwdy');
+                if (bgResponse.ok) {
+                    const { url } = await bgResponse.json();
+                    document.body.style.setProperty('--featured-image', `url('${url}')`);
+                }
+            } catch (error) {
+                console.error('Error setting background:', error);
+            }
+        });
+    </script>
+</body>
+</html>

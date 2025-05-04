@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorations - shefali</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="explorations.css">
+</head>
+<body class="explorations-page">
+    <main class="explorations-container">
+        <header class="explorations-header">
+            <h1 class="title">explorations</h1>
+            <button class="nav-button back-button" onclick="window.location.href='index.html'">← back to main</button>
+        </header>
+        
+        <div class="projects-grid">
+            <article class="project-card">
+                <div class="project-header">
+                    <h2 class="project-title">Neural Garden</h2>
+                    <span class="project-status">In Progress</span>
+                </div>
+                <p class="project-description">
+                    A generative art experiment using machine learning to create evolving digital plants that respond to environmental data.
+                </p>
+                <div class="project-meta">
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">TensorFlow</span>
+                        <span class="tech-tag">WebGL</span>
+                    </div>
+                    <a href="projects/neural-garden.html" class="project-link">view project →</a>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-header">
+                    <h2 class="project-title">Light Traces</h2>
+                    <span class="project-status">Complete</span>
+                </div>
+                <p class="project-description">
+                    An interactive installation that captures and visualizes movement through long-exposure photography techniques.
+                </p>
+                <div class="project-meta">
+                    <div class="tech-stack">
+                        <span class="tech-tag">OpenCV</span>
+                        <span class="tech-tag">Processing</span>
+                        <span class="tech-tag">Arduino</span>
+                    </div>
+                    <a href="projects/light-traces.html" class="project-link">view project →</a>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-header">
+                    <h2 class="project-title">Data Whispers</h2>
+                    <span class="project-status">Prototype</span>
+                </div>
+                <p class="project-description">
+                    Converting environmental sensor data into ambient soundscapes using granular synthesis.
+                </p>
+                <div class="project-meta">
+                    <div class="tech-stack">
+                        <span class="tech-tag">Max/MSP</span>
+                        <span class="tech-tag">Raspberry Pi</span>
+                        <span class="tech-tag">Python</span>
+                    </div>
+                    <a href="projects/data-whispers.html" class="project-link">view project →</a>
+                </div>
+            </article>
+        </div>
+    </main>
+    <div class="grain-overlay"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const bgResponse = await fetch('/api/image/DSC02758_mfnler');
+                if (bgResponse.ok) {
+                    const { url } = await bgResponse.json();
+                    document.body.style.setProperty('--featured-image', `url('${url}')`);
+                }
+            } catch (error) {
+                console.error('Error setting background:', error);
+            }
+        });
+    </script>
+</body>
+</html>

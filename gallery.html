@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - shefali</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="gallery.css">
+    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+</head>
+<body class="gallery-page">
+    <main class="gallery-container">
+        <header class="gallery-header">
+            <h1 class="title">gallery</h1>
+            <button class="nav-button back-button" onclick="window.location.href='index.html'">← back to main</button>
+        </header>
+        
+        <div id="photo-grid" class="photo-grid">
+            <!-- Photos will be loaded dynamically -->
+            <div class="loading">Loading gallery...</div>
+        </div>
+
+        <!-- Modal for full-resolution images -->
+        <div class="modal">
+            <span class="modal-close">&times;</span>
+            <img class="modal-content" src="" alt="Full resolution image">
+        </div>
+    </main>
+    <script src="gallery.js"></script>
+    <script src="gallery-script.js"></script>
+</body>
+</html>
