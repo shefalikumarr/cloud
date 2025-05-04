@@ -5,6 +5,13 @@ const path = require('path');
 
 const app = express();
 
+// Configure Cloudinary
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
 console.log('Starting server configuration...');
 
 // Request logging middleware
@@ -33,12 +40,6 @@ app.get('/api/test', (req, res) => {
     res.json({ status: 'ok' });
 });
 
-// Configure Cloudinary
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
-});
 console.log('Cloudinary configured with cloud name:', process.env.CLOUDINARY_CLOUD_NAME);
 
 // Endpoint to get signed URLs for images
