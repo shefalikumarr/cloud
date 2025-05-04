@@ -47,6 +47,7 @@
 .gallery-image-container {
     break-inside: avoid;
     margin-bottom: 1rem;
+    margin-top: 4rem;
     position: relative;
 }
 
