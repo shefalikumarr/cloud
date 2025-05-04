@@ -80,7 +80,7 @@ body::before {
     padding: 2rem;
     max-width: 400px;
     margin: 0 auto;
-    margin-top: 4rem;
+    margin-top: 5rem;
 }
 
 .left-panel {
@@ -121,9 +121,9 @@ body::before {
 
 .title {
     font-family: 'Rockwell-Bold', 'Rockwell Bold', serif;
-    font-size: 3rem;
+    font-size: 2rem;
     color: var(--accent-color);
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     font-weight: normal;
 }
 
