@@ -16,17 +16,24 @@ async function loadGalleryImages() {
             container.className = 'gallery-image-container';
             
             const img = document.createElement('img');
-            img.src = image.url; // Thumbnail URL for grid view
-            img.alt = image.alt;
+            img.src = image.url;
+            img.alt = image.alt || 'Gallery image';
             img.className = 'gallery-image';
-            img.dataset.fullResUrl = image.fullResUrl; // Store high-res URL as data attribute
+            
+            // Store full resolution URL
+            const fullResUrl = image.fullResUrl;
+            if (!fullResUrl) {
+                console.error('No full resolution URL for image:', image);
+                return;
+            }
             
             // Add load handler for fade-in effect
             img.onload = () => img.classList.add('loaded');
             
-            // Add click handler for each image
-            img.addEventListener('click', function() {
-                openModal(this.dataset.fullResUrl);
+            // Add click handler
+            container.addEventListener('click', () => {
+                console.log('Opening image:', fullResUrl);
+                openModal(fullResUrl);
             });
             
             container.appendChild(img);
@@ -55,10 +62,15 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         
-        console.log('Opening modal with URL:', fullResUrl);
-        modal.classList.add('active');
-        modalImg.src = fullResUrl;
-        document.body.style.overflow = 'hidden';
+        // Preload the image
+        const img = new Image();
+        img.onload = function() {
+            modalImg.src = fullResUrl;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+        img.src = fullResUrl;
+        console.log('Loading image:', fullResUrl);
     }
 
     function closeModal() {

@@ -47,6 +47,7 @@
 .gallery-image-container {
     break-inside: avoid;
     margin-bottom: 1rem;
+    position: relative;
 }
 
 .gallery-image {
@@ -54,15 +55,13 @@
     height: auto;
     display: block;
     opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.5s ease;
+    position: relative;
+    z-index: 1;
 }
 
 .gallery-image.loaded {
     opacity: 1;
-}
-
-.gallery-image:hover {
-    transform: scale(1.02);
 }
 
 @media screen and (max-width: 1200px) {
@@ -95,14 +94,30 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
     cursor: pointer;
 }
 
-.photo-grid img:hover {
-    transform: scale(1.02);
+.gallery-image-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: 
+        0 0 20px rgba(255, 255, 255, 0.3),
+        0 0 40px rgba(255, 255, 255, 0.2),
+        0 0 60px rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
 }
 
+.gallery-image-container:hover::after {
+    opacity: 1;
+}
+
+/* Modal styles */
 .modal {
     display: none;
     position: fixed;
@@ -112,38 +127,41 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.9);
-    padding: 20px;
-    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .modal.active {
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 1;
 }
 
 .modal-content {
     max-width: 90%;
     max-height: 90vh;
     object-fit: contain;
+    cursor: zoom-in;
     transition: transform 0.3s ease;
-    cursor: pointer;
 }
 
 .modal-content.zoomed {
     transform: scale(1.5);
+    cursor: zoom-out;
 }
 
 .modal-close {
     position: absolute;
-    top: 15px;
-    right: 25px;
-    color: #f1f1f1;
+    top: 20px;
+    right: 30px;
+    color: white;
     font-size: 40px;
     font-weight: bold;
     cursor: pointer;
+    z-index: 1001;
 }
 
 .modal-close:hover {
-    color: #bbb;
+    color: #999;
 }
