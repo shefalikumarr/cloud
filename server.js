@@ -51,11 +51,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// Health check endpoint
-app.get('/', (req, res) => {
-    res.send('Server is running!');
-});
-
 // Test endpoint
 app.get('/api/test', (req, res) => {
     console.log('Test endpoint hit');
@@ -119,13 +114,11 @@ app.get('/api/images', async (req, res) => {
 
 // Endpoint to get signed URL for a specific image
 app.get('/api/image/:id', async (req, res) => {
-    try {
-        const signedUrl = cloudinary.url(req.params.id, {
+    try {        const signedUrl = cloudinary.url(req.params.id, {
             sign_url: true,
             secure: true,
             transformation: [
-                { effect: 'grayscale' },
-                { effect: 'contrast:50' }
+                { quality: "auto" }
             ]
         });
         res.json({ url: signedUrl });
@@ -138,14 +131,12 @@ app.get('/api/image/:id', async (req, res) => {
 // Endpoint to get initial page load images
 app.get('/api/initial-images', async (req, res) => {
     console.log('Initial images endpoint hit');
-    try {
-        const backgroundUrl = cloudinary.url('DSC02805_yy1nkv.jpg', {
+    try {        const backgroundUrl = cloudinary.url('DSC02805_yy1nkv.jpg', {
             sign_url: true,
             secure: true,
             resource_type: 'image',
             transformation: [
-                { effect: 'grayscale' },
-                { effect: 'contrast:50' }
+                { quality: "auto" }
             ]
         });
         const featuredUrl = cloudinary.url('DSC01893_xt8pgi.jpg', {
@@ -153,8 +144,7 @@ app.get('/api/initial-images', async (req, res) => {
             secure: true,
             resource_type: 'image',
             transformation: [
-                { effect: 'grayscale' },
-                { effect: 'contrast:50' }
+                { quality: "auto" }
             ]
         });
         
@@ -171,6 +161,11 @@ app.get('/api/initial-images', async (req, res) => {
 
 // Serve static files
 app.use(express.static(path.join(__dirname)));
+
+// Serve index.html at the root
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
