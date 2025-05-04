@@ -34,6 +34,11 @@ app.use((req, res, next) => {
     next();
 });
 
+// Health check endpoint
+app.get('/', (req, res) => {
+    res.send('Server is running!');
+});
+
 // Test endpoint
 app.get('/api/test', (req, res) => {
     console.log('Test endpoint hit');
@@ -59,22 +64,16 @@ app.get('/api/images', async (req, res) => {
             // Thumbnail version - optimized for grid view
             const thumbnailUrl = cloudinary.url(resource.public_id, {
                 sign_url: true,
-                secure: true,
-                transformation: [
+                secure: true,                transformation: [
                     { width: 800, height: 800, crop: 'limit' },
-                    { quality: "auto" },
-                    { effect: 'grayscale' },
-                    { effect: 'contrast:80' }
+                    { quality: "auto" }
                 ]
             });
             
             // Full resolution version - maximum quality with no transformations except style
             const fullUrl = cloudinary.url(resource.public_id, {
                 sign_url: true,
-                secure: true,
-                transformation: [
-                    { effect: 'grayscale' },
-                    { effect: 'contrast:80' },
+                secure: true,                transformation: [
                     { flags: "attachment" } // Forces the original resolution
                 ]
             });
@@ -169,8 +168,10 @@ app.use((req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+const HOST = '0.0.0.0';  // This ensures the app listens on all network interfaces
+
+app.listen(PORT, HOST, () => {
+    console.log(`Server running at http://${HOST}:${PORT}`);
     console.log('Available endpoints:');
     console.log('- GET /api/test');
     console.log('- GET /api/initial-images');
