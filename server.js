@@ -159,13 +159,13 @@ app.get('/api/initial-images', async (req, res) => {
     }
 });
 
-// Serve static files
-app.use(express.static(path.join(__dirname)));
-
 // Serve livingroom.html at the root
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'livingroom.html'));
 });
+
+// Serve static files
+app.use(express.static(path.join(__dirname)));
 
 // Error handling middleware
 app.use((err, req, res, next) => {
