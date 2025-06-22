@@ -2,6 +2,7 @@
     background-color: black;
     position: relative;
     min-height: 100vh;
+    font-family: 'Thonburi', sans-serif;
 }
 
 .essays-page::before {
@@ -27,6 +28,7 @@
 }
 
 .essays-header {
+    font-family: 'Thonburi', sans-serif;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -57,13 +59,14 @@
 }
 
 .essay-title {
-    font-family: 'Rockwell-Bold', 'Rockwell Bold', serif;
+    font-family: 'Thonburi', sans-serif;
     color: var(--accent-color);
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
 }
 
 .essay-meta {
+    font-family: 'Thonburi', sans-serif;
     color: var(--text-color);
     font-size: 0.9rem;
     margin-bottom: 1rem;
@@ -71,12 +74,14 @@
 }
 
 .essay-excerpt {
+    font-family: 'Thonburi', sans-serif;
     color: var(--text-color);
     margin-bottom: 1.5rem;
     line-height: 1.6;
 }
 
 .read-more {
+    font-family: 'Thonburi', sans-serif;
     color: var(--text-color);
     text-decoration: none;
     border-bottom: 1px solid var(--text-color);

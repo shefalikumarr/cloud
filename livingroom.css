@@ -1,0 +1,86 @@
+.site-warning {
+  position: fixed;
+  left: 2vw;
+  bottom: 2vw;
+  font-family: 'Thonburi', sans-serif;
+  font-size: min(max(1.5vw, 10px), 1.1rem);
+  color: #fff;
+  opacity: 0.7;
+  z-index: 1002;
+  background: none;
+  pointer-events: none;
+  user-select: none;
+  text-align: left;
+}
+/* Guided tour link styles */
+.guided-tour-link {
+  position: fixed;
+  right: 2vw;
+  bottom: 2vw;
+  font-family: 'Thonburi', sans-serif;
+  font-size: min(max(2.6vw, 12px), 3.5vw);
+  color: #fff;
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  text-decoration: none;
+  opacity: 0.85;
+  z-index: 1002;
+  font-weight: normal;
+  transition: all 0.3s, padding-left 0.3s;
+}
+.guided-tour-link:hover {
+  opacity: 1;
+  transform: translateX(0.5vw);
+}
+body.livingroom-bg {
+  background: #222;
+  min-height: 100vh;
+  position: relative;
+  font-family: 'Thonburi', sans-serif;
+}
+body.livingroom-bg::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: var(--livingroom-bg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  opacity: 0.85;
+  z-index: -2;
+}
+
+body.livingroom-bg::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255, 248, 51, 0.09);
+  pointer-events: none;
+  z-index: -1;
+}
+.menu-list {
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+}
+.menu-list li {
+  margin-bottom: 0.2vw;
+  display: flex;
+  align-items: center;
+  font-size: min(max(2.6vw, 12px), 3.5vw);
+  font-family: 'Thonburi', sans-serif;
+  color: #fff;
+  opacity: 0.85;
+}
+.menu-list .menu-link {
+  color: #fff;
+  text-decoration: none;
+  opacity: 0.85;
+  transition: all 0.3s;
+  font-family: 'Thonburi', sans-serif;
+}
+.menu-list .menu-link:hover {
+  opacity: 1;
+  padding-left: 0.5vw;
+}
