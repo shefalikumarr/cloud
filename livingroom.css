@@ -1,9 +1,47 @@
-.site-warning {
+.bottom-corner-group {
   position: fixed;
   left: 2vw;
+  right: 2vw;
   bottom: 2vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  z-index: 1002;
+  pointer-events: none;
+}
+.bottom-corner-group > * {
+  pointer-events: auto;
+}
+
+@media (max-width: 600px) {
+  .bottom-corner-group {
+    flex-direction: column;
+    align-items: flex-end;
+    left: 0;
+    right: 0;
+    bottom: 1vw;
+    width: 100vw;
+    padding: 0 2vw;
+    gap: 0.5em;
+  }
+  .site-warning {
+    order: -1;
+    margin-bottom: 0.5em;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: right;
+    width: 100%;
+  }
+  .guided-tour-link {
+    align-self: flex-end;
+  }
+}
+.site-warning {
+  position: static;
+  margin-bottom: 0;
   font-family: 'Thonburi', sans-serif;
-  font-size: min(max(1.5vw, 10px), 1.1rem);
+  font-size: min(max(1.5vw, 1.7rem), 1.1rem);
   color: #fff;
   opacity: 0.7;
   z-index: 1002;
@@ -14,11 +52,10 @@
 }
 /* Guided tour link styles */
 .guided-tour-link {
-  position: fixed;
-  right: 2vw;
-  bottom: 2vw;
+  position: static;
+  margin-bottom: 0;
   font-family: 'Thonburi', sans-serif;
-  font-size: min(max(2.6vw, 12px), 3.5vw);
+  font-size: min(max(2.6vw, 3rem), 3.5vw);
   color: #fff;
   background: none;
   border-radius: 0;
@@ -68,7 +105,7 @@ body.livingroom-bg::after {
   margin-bottom: 0.2vw;
   display: flex;
   align-items: center;
-  font-size: min(max(2.6vw, 12px), 3.5vw);
+  font-size: min(max(2.6vw, 3rem), 3.5vw);
   font-family: 'Thonburi', sans-serif;
   color: #fff;
   opacity: 0.85;
