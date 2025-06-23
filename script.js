@@ -1,18 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    // Load initial images
-    try {
-        const response = await fetch('/api/initial-images');
-        if (!response.ok) {
-            throw new Error('Failed to fetch images');
-        }
-        
-        const { background } = await response.json();
-        
-        // Set background image without transition
-        document.body.style.setProperty('--featured-image', `url('${background}')`);
-    } catch (error) {
-        console.error('Error loading images:', error);
-    }
+    // (Background image is set by inline script in index.html, not here)
 
     // Add hover animations for navigation buttons
     const buttons = document.querySelectorAll('.nav-button');
@@ -37,12 +24,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
             const fromEmail = contactForm.querySelector('#from').value;
             const message = contactForm.querySelector('#message').value;
-            
             alert('Message sent!\nFrom: ' + fromEmail + '\nMessage: ' + message);
             contactForm.reset();
         });
-    }    // Navigation link handling can be added here if needed in the future
+    }
+    // Navigation link handling can be added here if needed in the future
 });

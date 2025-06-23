@@ -48,10 +48,10 @@
 }
 
 .project-card {
-    border: 1px solid var(--text-color);
+    border: 1px solid rgba(255,255,255,0.25);
     padding: 2rem;
     transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(255,255,255,0.25); /* soft white tint */
 }
 
 .project-card:hover {

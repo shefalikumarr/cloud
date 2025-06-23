@@ -131,14 +131,8 @@ app.get('/api/image/:id', async (req, res) => {
 // Endpoint to get initial page load images
 app.get('/api/initial-images', async (req, res) => {
     console.log('Initial images endpoint hit');
-    try {        const backgroundUrl = cloudinary.url('DSC02805_yy1nkv.jpg', {
-            sign_url: true,
-            secure: true,
-            resource_type: 'image',
-            transformation: [
-                { quality: "auto" }
-            ]
-        });
+    try {
+        // Remove backgroundUrl, only return featuredUrl if needed
         const featuredUrl = cloudinary.url('DSC01893_xt8pgi.jpg', {
             sign_url: true,
             secure: true,
@@ -147,10 +141,8 @@ app.get('/api/initial-images', async (req, res) => {
                 { quality: "auto" }
             ]
         });
-        
-        console.log('Generated URLs:', { backgroundUrl, featuredUrl });
+        console.log('Generated URL:', { featuredUrl });
         res.json({
-            background: backgroundUrl,
             featured: featuredUrl
         });
     } catch (error) {

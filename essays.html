@@ -12,31 +12,49 @@
         <a href="livingroom.html" class="path-segment">main</a>
         <span class="path-separator">/</span>
         <span class="current-path">essays</span>
-    </nav>    <main class="essays-container">
-        </header>
-          <div class="essays-grid">
-            <article class="essay-preview">                <h2 class="essay-title">The AI Arms Race</h2>
+    </nav>
+    <main class="essays-container">
+        <div class="essays-grid">
+            <article class="essay-preview">
+                <h2 class="essay-title">The AI Arms Race</h2>
                 <div class="essay-meta">February 2025</div>
                 <p class="essay-excerpt">
                     Examining the current state of artificial intelligence development, its implications for society, and the ethical considerations we must address as we navigate this technological revolution.
                 </p>
                 <a href="https://substack.com/home/post/p-156631555" class="read-more" target="_blank" rel="noopener noreferrer">read on substack →</a>
             </article>
+            <article class="essay-preview">
+                <h2 class="essay-title">On Digital Gardens</h2>
+                <div class="essay-meta">October 2024</div>
+                <p class="essay-excerpt">
+                    A reflection on the evolution of personal websites, the philosophy of digital gardening, and how we can cultivate more meaningful, less performative spaces online.
+                </p>
+                <a href="https://substack.com/home/post/p-156631556" class="read-more" target="_blank" rel="noopener noreferrer">read on substack →</a>
+            </article>
+            <article class="essay-preview">
+                <h2 class="essay-title">The Puzzle of Identity</h2>
+                <div class="essay-meta">July 2024</div>
+                <p class="essay-excerpt">
+                    Exploring the shifting nature of identity in a hyperconnected world, and how technology both fragments and unifies our sense of self.
+                </p>
+                <a href="https://substack.com/home/post/p-156631557" class="read-more" target="_blank" rel="noopener noreferrer">read on substack →</a>
+            </article>
+            <article class="essay-preview">
+                <h2 class="essay-title">Notes on Serendipity</h2>
+                <div class="essay-meta">May 2024</div>
+                <p class="essay-excerpt">
+                    Thoughts on the role of chance, curiosity, and open-ended exploration in creative work and personal growth.
+                </p>
+                <a href="https://substack.com/home/post/p-156631558" class="read-more" target="_blank" rel="noopener noreferrer">read on substack →</a>
+            </article>
         </div>
     </main>
-    <div class="grain-overlay"></div>
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                const bgResponse = await fetch('/api/image/DSC02811_burwdy');
-                if (bgResponse.ok) {
-                    const { url } = await bgResponse.json();
-                    document.body.style.setProperty('--featured-image', `url('${url}')`);
-                }
-            } catch (error) {
-                console.error('Error setting background:', error);
-            }
+        document.addEventListener('DOMContentLoaded', function() {
+            const url = 'https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto/DSC04525_h8soix.jpg';
+            document.body.style.setProperty('--featured-image', `url('${url}')`);
         });
     </script>
+    <div class="essays-yellow-overlay"></div>
 </body>
 </html>

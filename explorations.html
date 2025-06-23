@@ -12,9 +12,9 @@
         <a href="livingroom.html" class="path-segment">main</a>
         <span class="path-separator">/</span>
         <span class="current-path">explorations</span>
-    </nav>    <main class="explorations-container">
-        </header>
-          <div class="projects-grid">
+    </nav>
+    <main class="explorations-container">
+        <div class="projects-grid">
             <article class="project-card">
                 <div class="project-header">
                     <h2 class="project-title">me, cloned</h2>
@@ -23,7 +23,8 @@
                 <p class="project-description">
                     A fine-tuned language model trained on my text messages and digital footprint, exploring the intersection of personal data and AI. An experiment in digital self-reflection and the nature of online identity.
                 </p>
-                <div class="project-meta">                    <div class="tech-stack">
+                <div class="project-meta">
+                    <div class="tech-stack">
                         <span class="tech-tag">PyTorch</span>
                         <span class="tech-tag">LangChain</span>
                         <span class="tech-tag">HuggingFace</span>
@@ -31,7 +32,6 @@
                     </div>
                 </div>
             </article>
-
             <article class="project-card">
                 <div class="project-header">
                     <h2 class="project-title">Curator</h2>
@@ -51,18 +51,10 @@
             </article>
         </div>
     </main>
-    <div class="grain-overlay"></div>
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                const bgResponse = await fetch('/api/image/DSC02758_mfnler');
-                if (bgResponse.ok) {
-                    const { url } = await bgResponse.json();
-                    document.body.style.setProperty('--featured-image', `url('${url}')`);
-                }
-            } catch (error) {
-                console.error('Error setting background:', error);
-            }
+        document.addEventListener('DOMContentLoaded', function() {
+            const url = 'https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto/DSCF2589_skkem5.jpg';
+            document.body.style.setProperty('--featured-image', `url('${url}')`);
         });
     </script>
 </body>

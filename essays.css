@@ -20,6 +20,16 @@
     z-index: -2;
 }
 
+/* Yellow overlay, matching livingroom */
+.essays-yellow-overlay {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255, 248, 51, 0.09);
+    pointer-events: none;
+    z-index: -1;
+}
+
 .essays-container {
     padding: 2rem;
     max-width: 800px;
@@ -48,9 +58,11 @@
 }
 
 .essay-preview {
-    border: 1px solid var(--text-color);
+    border: 1px solid rgba(255,255,255,0.25);
     padding: 2rem;
     transition: all 0.3s ease;
+    background: rgba(255,255,255,0.25); /* soft white tint */
+    opacity: 1;
 }
 
 .essay-preview:hover {

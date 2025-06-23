@@ -42,7 +42,13 @@
             </div>
         </section>
     </main>
-    <div class="grain-overlay"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const url = 'https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto/DSCN2112_c41v6m.jpg';
+            document.body.style.setProperty('--featured-image', `url('${url}')`);
+        });
+    </script>
+    <div class="index-yellow-overlay"></div>
     <script src="script.js"></script>
 </body>
 </html>
