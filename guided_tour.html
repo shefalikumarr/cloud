@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guided Tour</title>
+  <link rel="stylesheet" href="guided_tour.css">
+</head>
+<body>
+  <div id="guided-tour-modal" class="guided-tour-modal">
+    <div class="guided-tour-fade" id="guided-tour-fade"></div>
+    <div class="guided-tour-content" id="guided-tour-content">
+      <div class="guided-tour-options" id="guided-tour-options">
+        <div class="guided-tour-title">How much would you like to see?</div>
+        <span class="guided-tour-option" data-choice="bit">/ just a bit</span>
+        <span class="guided-tour-option" data-choice="little">/ a little of everything</span>
+        <span class="guided-tour-option" data-choice="all">/ all that there is</span>
+      </div>
+      <div class="guided-tour-slideshow" id="guided-tour-slideshow" style="display:none;">
+        <img id="guided-tour-image" src="" alt="Tour Image" />
+      <div class="guided-tour-slideshow-controls">
+        <span id="guided-tour-slide-counter" class="guided-tour-slide-counter"></span>
+        <button id="guided-tour-prev">Prev</button>
+        <button id="guided-tour-next">Next</button>
+        <button id="guided-tour-exit">Exit</button>
+      </div>
+      </div>
+    </div>
+  </div>
+  <script src="guided_tour.js"></script>
+</body>
+</html>

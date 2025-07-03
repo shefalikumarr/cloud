@@ -59,10 +59,11 @@ app.get('/api/test', (req, res) => {
 
 console.log('Cloudinary configured with cloud name:', process.env.CLOUDINARY_CLOUD_NAME);
 
-// Endpoint to get signed URLs for images
+
+// Endpoint to get signed URLs for all gallery images (website folder)
 app.get('/api/images', async (req, res) => {
     try {
-        console.log('Fetching images from Cloudinary...');
+        console.log('Fetching all gallery images from Cloudinary...');
         const result = await cloudinary.search
             .expression('folder:website')
             .with_field('context')
@@ -70,45 +71,82 @@ app.get('/api/images', async (req, res) => {
             .execute();
 
         console.log('Found resources:', result.resources.length);
-        
         const signedUrls = result.resources.map(resource => {
-            console.log('Processing resource:', resource.public_id);
-            // Thumbnail version - optimized for grid view
             const thumbnailUrl = cloudinary.url(resource.public_id, {
                 sign_url: true,
-                secure: true,                transformation: [
+                secure: true,
+                transformation: [
                     { width: 800, height: 800, crop: 'limit' },
                     { quality: "auto" }
                 ]
             });
-            
-            // Full resolution version - maximum quality with no transformations except style
             const fullUrl = cloudinary.url(resource.public_id, {
                 sign_url: true,
-                secure: true,                transformation: [
-                    { flags: "attachment" } // Forces the original resolution
+                secure: true,
+                transformation: [
+                    { flags: "attachment" }
                 ]
             });
-            
-            console.log({
-                publicId: resource.public_id,
-                thumbnailUrl,
-                fullUrl
-            });
-            
             return {
                 url: thumbnailUrl,
                 fullResUrl: fullUrl,
-                alt: resource.context?.alt || 'Gallery image',
-                publicId: resource.public_id
+                alt: resource.context?.custom?.title || 'Gallery image',
+                description: resource.context?.custom?.description || '',
+                publicId: resource.public_id,
+                tags: resource.tags || []
             };
         });
-
-        console.log('Sending response with', signedUrls.length, 'images');
         res.json(signedUrls);
     } catch (error) {
         console.error('Error fetching images:', error);
         res.status(500).json({ error: 'Failed to fetch images' });
+    }
+});
+
+// Endpoint to get signed URLs for guided tour images by tag
+// Usage: /api/guided-tour-images?tag=short_tour or medium_tour or long_tour
+app.get('/api/guided-tour-images', async (req, res) => {
+    const tag = req.query.tag;
+    if (!tag) {
+        return res.status(400).json({ error: 'Missing tag parameter' });
+    }
+    try {
+        console.log(`Fetching guided tour images for tag: ${tag}`);
+        const result = await cloudinary.search
+            .expression(`folder:website AND tags:${tag}`)
+            .with_field('context')
+            .max_results(100)
+            .execute();
+
+        const signedUrls = result.resources.map(resource => {
+            const thumbnailUrl = cloudinary.url(resource.public_id, {
+                sign_url: true,
+                secure: true,
+                transformation: [
+                    { width: 800, height: 800, crop: 'limit' },
+                    { quality: "auto" }
+                ]
+            });
+            const fullUrl = cloudinary.url(resource.public_id, {
+                sign_url: true,
+                secure: true,
+                transformation: [
+                    { flags: "attachment" }
+                ]
+            });
+            return {
+                url: thumbnailUrl,
+                fullResUrl: fullUrl,
+                alt: resource.context?.custom?.title || 'Gallery image',
+                description: resource.context?.custom?.description || '',
+                publicId: resource.public_id,
+                tags: resource.tags || []
+            };
+        });
+        res.json(signedUrls);
+    } catch (error) {
+        console.error('Error fetching guided tour images:', error);
+        res.status(500).json({ error: 'Failed to fetch guided tour images' });
     }
 });
 

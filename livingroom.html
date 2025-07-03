@@ -6,6 +6,7 @@
     <title>Living Room</title>
     <link rel="stylesheet" href="livingroom.css">
 </head>
+<script src="livingroom.js"></script>
 <body class="livingroom-bg">
         <div class="menu-tile">
             <ul class="menu-list">
@@ -23,12 +24,31 @@
         document.body.style.setProperty('--livingroom-bg', `url('${url}')`);
       });
     </script>
-</body>
-</body>
+
 <div class="bottom-corner-group">
   <div class="site-warning">⚠︎ site under construction, some things might lead nowhere ⚠︎</div>
-  <a href="puzzle-landing.html" class="guided-tour-link">or take a guided tour -&gt;</a>
+  <a href="guided_tour.html" class="guided-tour-link">or take a guided tour -&gt;</a>
 </div>
-</html>
+
+<!-- Guided Tour Modal Overlay -->
+<div id="guided-tour-modal" class="guided-tour-modal" style="display:none;">
+  <div class="guided-tour-fade" id="guided-tour-fade"></div>
+  <div class="guided-tour-content" id="guided-tour-content">
+    <div class="guided-tour-options" id="guided-tour-options">
+      <div class="guided-tour-title">How much would you like to see?</div>
+      <span class="guided-tour-option" data-choice="bit">/ just a bit</span>
+      <span class="guided-tour-option" data-choice="little">/ a little of everything</span>
+      <span class="guided-tour-option" data-choice="all">/ all that there is</span>
+    </div>
+    <div class="guided-tour-slideshow" id="guided-tour-slideshow" style="display:none;">
+      <img id="guided-tour-image" src="" alt="Tour Image" />
+      <div class="guided-tour-slideshow-controls">
+        <button id="guided-tour-prev">Prev</button>
+        <button id="guided-tour-next">Next</button>
+        <button id="guided-tour-exit">Exit</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
