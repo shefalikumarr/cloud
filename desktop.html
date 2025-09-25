@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shefali - Desktop</title>
+    <link rel="stylesheet" href="desktop.css?v=1.9">
+      <script src="desktop.js?v=1.5"></script> <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="desktop">
+        <!-- Desktop Background -->
+        <div class="desktop-background"></div>
+        
+        <!-- Desktop Icons -->
+        <div class="desktop-icons">
+            <div class="icon" data-window="about">
+                <div class="icon-image about-icon"></div>
+                <span class="icon-label">About.exe</span>
+            </div>
+            
+            <div class="icon" data-window="gallery">
+                <div class="icon-image gallery-icon"></div>
+                <span class="icon-label">Gallery</span>
+            </div>
+            
+            <div class="icon" data-window="essays">
+                <div class="icon-image essays-icon"></div>
+                <span class="icon-label">Essays</span>
+            </div>
+            
+            <div class="icon" data-window="projects">
+                <div class="icon-image projects-icon"></div>
+                <span class="icon-label">Projects</span>
+            </div>
+            
+            <div class="icon" data-window="contact">
+                <div class="icon-image contact-icon"></div>
+                <span class="icon-label">Contact</span>
+            </div>
+        </div>
+        
+        <!-- Windows -->
+        <div class="window" id="about-window">
+            <div class="window-header">
+                <span class="window-title">About - Shefali</span>
+                <div class="window-controls">
+                    <button class="window-control minimize">_</button>
+                    <button class="window-control maximize">□</button>
+                    <button class="window-control close">×</button>
+                </div>
+            </div>
+            <div class="window-content">
+                <div class="window-menu">
+                    <span class="menu-item">File</span>
+                    <span class="menu-item">Edit</span>
+                    <span class="menu-item">View</span>
+                    <span class="menu-item">Help</span>
+                </div>
+                <div class="content-area">
+                    <h2>Hi, I am Shefali</h2>
+                    <p>Exploring technology as a tool for the creation of art, interaction with nature, and procurement of knowledge.</p>
+                    <p>Mostly in the form of photography, somewhat coherent thoughts, and almost operational side projects. ♡</p>
+                    
+                    <div class="links-section">
+                        <a href="gallery.html" class="retro-link">► Photography Gallery</a>
+                        <a href="essays.html" class="retro-link">► Essays & Thoughts</a>
+                        <a href="explorations.html" class="retro-link">► Side Projects</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="window hidden" id="gallery-window">
+            <div class="window-header">
+                <span class="window-title">My Pictures</span>
+                <div class="window-controls">
+                    <button class="window-control minimize">_</button>
+                    <button class="window-control maximize">□</button>
+                    <button class="window-control close">×</button>
+                </div>
+            </div>
+            <div class="window-content">
+                <div class="window-menu">
+                    <span class="menu-item">File</span>
+                    <span class="menu-item">Edit</span>
+                    <span class="menu-item">View</span>
+                    <span class="menu-item">Tools</span>
+                    <span class="menu-item">Help</span>
+                </div>
+                <div class="content-area gallery-content">
+                    <div class="gallery-grid" id="desktop-gallery-grid">
+                        <div class="gallery-loading">Loading images...</div>
+                    </div>
+                    <div class="gallery-status" id="gallery-status">Loading...</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="window hidden" id="essays-window">
+            <div class="window-header">
+                <span class="window-title">Essays.txt - Notepad</span>
+                <div class="window-controls">
+                    <button class="window-control minimize">_</button>
+                    <button class="window-control maximize">□</button>
+                    <button class="window-control close">×</button>
+                </div>
+            </div>
+            <div class="window-content">
+                <div class="window-menu">
+                    <span class="menu-item">File</span>
+                    <span class="menu-item">Edit</span>
+                    <span class="menu-item">Format</span>
+                    <span class="menu-item">Help</span>
+                </div>
+                <div class="content-area notepad">
+                    <div class="notepad-content">
+                        <p>> Recent Thoughts:</p>
+                        <p></p>
+                        <p>On Technology and Art...</p>
+                        <p>Digital Minimalism in Practice...</p>
+                        <p>The Philosophy of Photography...</p>
+                        <p>Nature vs. Digital Spaces...</p>
+                        <p></p>
+                        <p>Click to read full essays...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="window hidden" id="projects-window">
+            <div class="window-header">
+                <span class="window-title">My Computer - Projects</span>
+                <div class="window-controls">
+                    <button class="window-control minimize">_</button>
+                    <button class="window-control maximize">□</button>
+                    <button class="window-control close">×</button>
+                </div>
+            </div>
+            <div class="window-content">
+                <div class="window-menu">
+                    <span class="menu-item">File</span>
+                    <span class="menu-item">Edit</span>
+                    <span class="menu-item">View</span>
+                </div>
+                <div class="content-area">
+                    <div class="file-explorer">
+                        <div class="folder-item">📁 Web Development</div>
+                        <div class="folder-item">📁 Photography Tools</div>
+                        <div class="folder-item">📁 Creative Coding</div>
+                        <div class="folder-item">📁 Design Experiments</div>
+                        <div class="file-item">📄 README.txt</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="window hidden" id="contact-window">
+            <div class="window-header">
+                <span class="window-title">Mail - Compose Message</span>
+                <div class="window-controls">
+                    <button class="window-control minimize">_</button>
+                    <button class="window-control maximize">□</button>
+                    <button class="window-control close">×</button>
+                </div>
+            </div>
+            <div class="window-content">
+                <div class="window-menu">
+                    <span class="menu-item">File</span>
+                    <span class="menu-item">Edit</span>
+                    <span class="menu-item">Insert</span>
+                    <span class="menu-item">Send</span>
+                </div>
+                <div class="content-area">
+                    <form class="email-form">
+                        <div class="form-row">
+                            <label>To:</label>
+                            <input type="text" value="shefali@example.com" readonly>
+                        </div>
+                        <div class="form-row">
+                            <label>From:</label>
+                            <input type="email" placeholder="your.email@example.com" required>
+                        </div>
+                        <div class="form-row">
+                            <label>Subject:</label>
+                            <input type="text" placeholder="Hello from your website">
+                        </div>
+                        <div class="form-row">
+                            <label>Message:</label>
+                            <textarea placeholder="Type your message here..." rows="8"></textarea>
+                        </div>
+                        <button type="submit" class="send-button">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Taskbar -->
+        <div class="taskbar">
+            <div class="start-button">
+                <span class="start-icon">⊞</span>
+                <span class="start-text">Start</span>
+            </div>
+            
+            <div class="taskbar-items">
+                <div class="taskbar-item active" data-window="about">About.exe</div>
+            </div>
+            
+            <div class="system-tray">
+                <div class="tray-icon">♪</div>
+                <div class="tray-icon">📶</div>
+                <div class="clock" id="clock">12:00 PM</div>
+            </div>
+        </div>
+        
+        <!-- Start Menu -->
+        <div class="start-menu hidden" id="start-menu">
+            <div class="start-menu-header">
+                <div class="start-logo">Windows 95</div>
+            </div>
+            <div class="start-menu-items">
+                <div class="start-menu-item">📁 Programs</div>
+                <div class="start-menu-item">📄 Documents</div>
+                <div class="start-menu-item">⚙️ Settings</div>
+                <div class="start-menu-item">🔍 Find</div>
+                <div class="start-menu-item">❓ Help</div>
+                <div class="start-menu-separator"></div>
+                <div class="start-menu-item">🔌 Shut Down...</div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="desktop.js?v=1.4"></script>
+</body>
+</html>
