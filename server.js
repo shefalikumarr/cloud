@@ -194,8 +194,8 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'livingroom.html'));
 });
 
-// Serve static files
-app.use(express.static(path.join(__dirname)));
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Error handling middleware
 app.use((err, req, res, next) => {
