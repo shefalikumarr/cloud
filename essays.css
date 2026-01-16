@@ -1,0 +1,107 @@
+.essays-page {
+    background-color: black;
+    position: relative;
+    min-height: 100vh;
+    font-family: 'Thonburi', sans-serif;
+}
+
+.essays-page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: var(--featured-image);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    opacity: 0.85;
+    z-index: -2;
+}
+
+/* Yellow overlay, matching livingroom */
+.essays-yellow-overlay {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255, 248, 51, 0.09);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.essays-container {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 4rem;
+}
+
+.essays-header {
+    font-family: 'Thonburi', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.back-button {
+    background-color: transparent;
+    border: 1px solid var(--text-color);
+    padding: 0.75rem 1.5rem;
+}
+
+.essays-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.essay-preview {
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 2rem;
+    transition: all 0.3s ease;
+    background: rgba(255,255,255,0.7); /* more opaque white */
+    opacity: 1;
+}
+
+.essay-preview:hover {
+    border-color: var(--accent-color);
+    transform: translateX(5px);
+}
+
+.essay-title {
+    font-family: 'Thonburi', sans-serif;
+    color: #181818;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.essay-meta {
+    font-family: 'Thonburi', sans-serif;
+    color: #222;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.essay-excerpt {
+    font-family: 'Thonburi', sans-serif;
+    color: #222;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.read-more {
+    font-family: 'Thonburi', sans-serif;
+    color: #181818;
+    text-decoration: none;
+    border-bottom: 1px solid #181818;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.read-more:hover {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+}

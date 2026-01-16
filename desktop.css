@@ -1,0 +1,962 @@
+/* Windows 95 Desktop Aesthetic - Grayscale */
+:root {
+    --gray-1: #c0c0c0;  /* Light gray - window backgrounds */
+    --gray-2: #808080;  /* Medium gray - borders, disabled text */
+    --gray-3: #404040;  /* Dark gray - text, active elements */
+    --gray-4: #000000;  /* Black - strong contrast */
+    --gray-5: #ffffff;  /* White - highlights */
+    --gray-6: #a0a0a0;  /* Desktop background */
+    --shadow-dark: rgba(0, 0, 0, 0.5);
+    --shadow-light: rgba(255, 255, 255, 0.5);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Share Tech Mono', 'MS Sans Serif', sans-serif;
+    font-size: 11px;
+    background: var(--gray-6);
+    overflow: hidden;
+    height: 100vh;
+    cursor: default;
+    user-select: none;
+}
+
+.desktop {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+}
+
+.desktop-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 30px);
+    background-image: url('https://res.cloudinary.com/djfrhmsgw/image/upload/DSC04556_nwkfdl.jpg');
+    background-size: 100% 100%; /* This stretches the image to fit exactly - creates the "ugly" stretched effect */
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.9;
+    filter: contrast(1.1) brightness(0.85);
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+/* Desktop Icons */
+.desktop-icons {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 10;
+}
+
+.icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 64px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 2px;
+    transition: background-color 0.1s;
+}
+
+.icon:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.icon.selected {
+    background-color: rgba(0, 0, 255, 0.3);
+    border: 1px dotted var(--gray-4);
+}
+
+.icon-image {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 4px;
+    border: 2px outset var(--gray-1);
+    background: var(--gray-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.about-icon::before { content: "👤"; }
+.gallery-icon::before { content: "🖼️"; }
+.essays-icon::before { content: "📝"; }
+.projects-icon::before { content: "💾"; }
+.contact-icon::before { content: "✉️"; }
+
+.icon-label {
+    font-size: 9px;
+    color: var(--gray-4);
+    text-align: center;
+    line-height: 1.2;
+    background: var(--gray-1);
+    padding: 1px 3px;
+    border-radius: 1px;
+    text-shadow: 1px 1px 0px var(--gray-1);
+}
+
+/* Windows */
+.window {
+    position: absolute;
+    background: var(--gray-1);
+    border: 2px outset var(--gray-1);
+    box-shadow: 2px 2px 4px var(--shadow-dark);
+    min-width: 400px;
+    min-height: 300px;
+    z-index: 100;
+    resize: both;
+    overflow: hidden;
+}
+
+.window.hidden {
+    display: none;
+}
+
+.window.maximized {
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: calc(100vh - 30px) !important;
+    resize: none;
+}
+
+.window-header {
+    background: linear-gradient(90deg, #000080 0%, #0000ff 100%);
+    color: var(--gray-5);
+    padding: 2px 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 20px;
+    cursor: move;
+    filter: grayscale(100%);
+    background: linear-gradient(90deg, var(--gray-3) 0%, var(--gray-2) 100%);
+}
+
+.window-title {
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.window-controls {
+    display: flex;
+    gap: 2px;
+}
+
+.window-control {
+    width: 16px;
+    height: 14px;
+    border: 1px outset var(--gray-1);
+    background: var(--gray-1);
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray-4);
+}
+
+.window-control:active {
+    border: 1px inset var(--gray-1);
+}
+
+.window-control.close:hover {
+    background: #ff0000;
+    filter: grayscale(100%);
+    background: var(--gray-3);
+    color: var(--gray-5);
+}
+
+.window-content {
+    height: calc(100% - 20px);
+    display: flex;
+    flex-direction: column;
+}
+
+.window-menu {
+    background: var(--gray-1);
+    border-bottom: 1px solid var(--gray-2);
+    padding: 4px 8px;
+    display: flex;
+    gap: 16px;
+}
+
+.menu-item {
+    cursor: pointer;
+    padding: 2px 8px;
+    font-size: 11px;
+}
+
+.menu-item:hover {
+    background: var(--gray-2);
+}
+
+.content-area {
+    flex: 1;
+    padding: 16px;
+    background: var(--gray-1);
+    color: var(--gray-4);
+    overflow: auto;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.content-area h2 {
+    margin-bottom: 12px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.content-area p {
+    margin-bottom: 8px;
+}
+
+.links-section {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.retro-link {
+    color: var(--gray-4);
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: monospace;
+}
+
+.retro-link:hover {
+    background: var(--gray-2);
+    color: var(--gray-5);
+}
+
+/* Gallery Window */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+    max-height: 320px;
+    overflow-y: auto;
+    padding: 8px;
+}
+
+.gallery-item {
+    width: 80px;
+    height: 100px;
+    background: var(--gray-5);
+    border: 1px solid var(--gray-2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    position: relative;
+    padding: 4px;
+    border-radius: 0;
+}
+
+.gallery-item:hover {
+    background: var(--gray-1);
+    border: 1px solid var(--gray-3);
+}
+
+.gallery-item.selected {
+    background: #316AC5;
+    color: var(--gray-5);
+    border: 1px solid #0000AA;
+    filter: grayscale(100%);
+    background: var(--gray-3);
+}
+
+.gallery-item img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border: 1px inset var(--gray-2);
+    background: var(--gray-5);
+    margin-bottom: 4px;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+.gallery-item .icon-label {
+    font-size: 9px;
+    color: var(--gray-4);
+    text-align: center;
+    line-height: 1.1;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background: transparent;
+    padding: 0;
+}
+
+.gallery-item.selected .icon-label {
+    color: var(--gray-5);
+}
+
+.gallery-loading {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 20px;
+    color: var(--gray-3);
+    font-style: italic;
+}
+
+.gallery-error {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 20px;
+    color: var(--gray-3);
+    background: var(--gray-1);
+    border: 2px inset var(--gray-1);
+}
+
+.gallery-content {
+    background: var(--gray-1);
+    border: 2px inset var(--gray-1);
+    margin: 0;
+    padding: 0;
+}
+
+.gallery-content .gallery-grid {
+    background: var(--gray-1);
+    border: none;
+    margin: 0;
+}
+
+.gallery-status {
+    background: var(--gray-1);
+    border: 1px inset var(--gray-1);
+    padding: 4px 8px;
+    font-size: 10px;
+}
+
+/* Essays Window - Notepad Style */
+.notepad {
+    background: var(--gray-1);
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+}
+
+.notepad-content {
+    line-height: 1.6;
+}
+
+.notepad-content p {
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+/* Projects Window - File Explorer */
+.file-explorer {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.folder-item, .file-item {
+    padding: 2px 4px;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.folder-item:hover, .file-item:hover {
+    background: var(--gray-2);
+    color: var(--gray-5);
+}
+
+/* Contact Window - Email Form */
+.email-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.form-row label {
+    width: 60px;
+    font-weight: bold;
+    font-size: 11px;
+    padding-top: 2px;
+}
+
+.form-row input, .form-row textarea {
+    flex: 1;
+    border: 2px inset var(--gray-1);
+    padding: 2px 4px;
+    font-family: inherit;
+    font-size: 11px;
+    background: var(--gray-1);
+}
+
+.form-row textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.send-button {
+    align-self: flex-start;
+    background: var(--gray-1);
+    border: 2px outset var(--gray-1);
+    padding: 4px 16px;
+    font-size: 11px;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.send-button:active {
+    border: 2px inset var(--gray-1);
+}
+
+/* Taskbar */
+.taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background: var(--gray-1);
+    border-top: 1px solid var(--gray-2);
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+
+.start-button {
+    height: 26px;
+    background: var(--gray-1);
+    border: 2px outset var(--gray-1);
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    margin: 2px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.start-button:active, .start-button.active {
+    border: 2px inset var(--gray-1);
+}
+
+.start-icon {
+    font-size: 14px;
+}
+
+.taskbar-items {
+    flex: 1;
+    display: flex;
+    gap: 2px;
+    margin-left: 4px;
+}
+
+.taskbar-item {
+    height: 22px;
+    background: var(--gray-1);
+    border: 1px outset var(--gray-1);
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 10px;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.taskbar-item.active {
+    border: 1px inset var(--gray-1);
+    background: var(--gray-2);
+}
+
+.system-tray {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-right: 4px;
+    border: 1px inset var(--gray-1);
+    padding: 2px 8px;
+    height: 20px;
+}
+
+.tray-icon {
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.clock {
+    font-size: 10px;
+    font-weight: bold;
+    min-width: 50px;
+    text-align: center;
+}
+
+/* Start Menu */
+.start-menu {
+    position: fixed;
+    bottom: 30px;
+    left: 2px;
+    width: 200px;
+    background: var(--gray-1);
+    border: 2px outset var(--gray-1);
+    box-shadow: 2px 2px 4px var(--shadow-dark);
+    z-index: 1001;
+}
+
+.start-menu.hidden {
+    display: none;
+}
+
+.start-menu-header {
+    background: linear-gradient(45deg, #000080 0%, #008080 100%);
+    color: var(--gray-5);
+    padding: 8px 16px;
+    font-weight: bold;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    filter: grayscale(100%);
+    background: linear-gradient(45deg, var(--gray-3) 0%, var(--gray-2) 100%);
+}
+
+.start-menu-items {
+    padding: 4px 0;
+}
+
+.start-menu-item {
+    padding: 4px 16px;
+    font-size: 11px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.start-menu-item:hover {
+    background: var(--gray-2);
+    color: var(--gray-5);
+}
+
+.start-menu-separator {
+    height: 1px;
+    background: var(--gray-2);
+    margin: 2px 8px;
+}
+
+/* Window positioning */
+#about-window {
+    top: 60px;
+    left: 120px;
+    width: 500px;
+    height: 400px;
+    z-index: 101;
+}
+
+#gallery-window {
+    top: 80px;
+    left: 140px;
+    width: 480px;
+    height: 420px;
+}
+
+#essays-window {
+    top: 100px;
+    left: 160px;
+    width: 480px;
+    height: 380px;
+}
+
+#projects-window {
+    top: 120px;
+    left: 180px;
+    width: 420px;
+    height: 320px;
+}
+
+#contact-window {
+    top: 140px;
+    left: 200px;
+    width: 500px;
+    height: 450px;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--gray-1);
+    border: 1px inset var(--gray-1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gray-2);
+    border: 1px outset var(--gray-1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gray-3);
+}
+
+::-webkit-scrollbar-corner {
+    background: var(--gray-1);
+}
+
+::-webkit-scrollbar-button {
+    background: var(--gray-1);
+    border: 1px outset var(--gray-1);
+    height: 16px;
+    width: 16px;
+}
+
+::-webkit-scrollbar-button:hover {
+    background: var(--gray-2);
+}
+
+/* Carousel Window */
+.carousel-content {
+    background: var(--gray-1);
+    border: 2px inset var(--gray-1);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.carousel-thumbnails {
+    background: var(--gray-1);
+    border-bottom: 1px solid var(--gray-2);
+    display: flex;
+    overflow-x: auto;
+    padding: 8px;
+    gap: 4px;
+    flex-shrink: 0;
+    height: 80px;
+}
+
+.carousel-thumb {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    border: 2px inset var(--gray-1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gray-1);
+}
+
+.carousel-thumb.active {
+    border: 2px solid var(--gray-4);
+    background: var(--gray-2);
+}
+
+.carousel-thumb:hover {
+    border: 2px outset var(--gray-1);
+}
+
+.carousel-thumb img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    image-rendering: pixelated;
+}
+
+.carousel-main-image {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: var(--gray-2);
+    border: 1px inset var(--gray-1);
+    margin: 8px;
+    overflow: hidden;
+}
+
+.carousel-main-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border: 1px solid var(--gray-2);
+}
+
+.carousel-nav-left,
+.carousel-nav-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    background: var(--gray-1);
+    border: 2px outset var(--gray-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--gray-4);
+    z-index: 10;
+}
+
+.carousel-nav-left {
+    left: 10px;
+}
+
+.carousel-nav-right {
+    right: 10px;
+}
+
+.carousel-nav-left:hover,
+.carousel-nav-right:hover {
+    background: var(--gray-2);
+}
+
+.carousel-nav-left:active,
+.carousel-nav-right:active {
+    border: 2px inset var(--gray-1);
+}
+
+.carousel-info {
+    background: var(--gray-1);
+    border-top: 1px solid var(--gray-2);
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    flex-shrink: 0;
+    height: 32px;
+}
+
+#carousel-counter {
+    font-weight: bold;
+    color: var(--gray-4);
+}
+
+#carousel-filename {
+    color: var(--gray-3);
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Carousel window positioning */
+#carousel-window {
+    top: 60px;
+    left: 100px;
+    width: 700px;
+    height: 500px;
+    z-index: 105;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .desktop-icons {
+        flex-direction: row;
+        flex-wrap: wrap;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        justify-content: space-around;
+    }
+    
+    .icon {
+        width: 50px;
+    }
+    
+    .window {
+        min-width: 280px;
+        min-height: 200px;
+        max-width: calc(100vw - 20px);
+        max-height: calc(100vh - 60px);
+    }
+    
+    /* Mobile window positioning - smaller windows so background is visible */
+    #about-window,
+    #gallery-window,
+    #essays-window,
+    #projects-window,
+    #contact-window {
+        top: 40px !important;
+        left: 20px !important;
+        width: calc(100vw - 60px) !important;
+        height: 400px !important;
+        max-width: calc(100vw - 60px) !important;
+        max-height: 450px !important;
+    }
+    
+    .window.maximized {
+        width: 100vw !important;
+        height: calc(100vh - 30px) !important;
+        top: 0 !important;
+        left: 0 !important;
+    }
+    
+    /* Make window headers more touch-friendly */
+    .window-header {
+        height: 36px;
+        padding: 6px 8px;
+        touch-action: none; /* Prevent default touch behaviors */
+    }
+    
+    .window-control {
+        width: 28px;
+        height: 24px;
+        font-size: 14px;
+        touch-action: manipulation;
+        z-index: 10;
+        position: relative;
+        cursor: pointer;
+    }
+    
+    .window-control:active {
+        transform: scale(0.95);
+    }
+    
+    /* Improve content area for mobile */
+    .content-area {
+        padding: 12px;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    
+    /* Gallery grid adjustments for mobile */
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        padding: 4px;
+    }
+    
+    .gallery-item {
+        width: 70px;
+        height: 85px;
+    }
+    
+    .gallery-item img {
+        width: 56px;
+        height: 56px;
+    }
+    
+    /* Modal adjustments */
+    .modal-content {
+        width: 98vw;
+        height: 98vh;
+    }
+    
+    .modal-header {
+        height: 44px;
+        padding: 8px 12px;
+    }
+    
+    .modal-close {
+        width: 32px;
+        height: 28px;
+        font-size: 16px;
+        touch-action: manipulation;
+    }
+    
+    .modal-image {
+        max-width: calc(100% - 8px);
+        max-height: calc(100% - 8px);
+    }
+    
+    /* Carousel mobile adjustments */
+    #carousel-window {
+        top: 10px !important;
+        left: 10px !important;
+        width: calc(100vw - 20px) !important;
+        height: calc(100vh - 60px) !important;
+    }
+    
+    .carousel-thumbnails {
+        height: 60px;
+        padding: 4px;
+        gap: 2px;
+    }
+    
+    .carousel-thumb {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .carousel-thumb img {
+        width: 44px;
+        height: 44px;
+    }
+    
+    .carousel-nav-left,
+    .carousel-nav-right {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+    }
+    
+    .carousel-info {
+        font-size: 10px;
+        padding: 6px 8px;
+        height: 28px;
+    }
+    
+    #carousel-filename {
+        max-width: 150px;
+    }
+    
+    /* Taskbar adjustments */
+    .taskbar {
+        height: 40px;
+    }
+    
+    .start-button {
+        height: 36px;
+        padding: 0 12px;
+        font-size: 12px;
+    }
+    
+    .taskbar-item {
+        height: 32px;
+        font-size: 11px;
+        padding: 0 12px;
+    }
+    
+    .system-tray {
+        height: 32px;
+        padding: 4px 12px;
+    }
+}
