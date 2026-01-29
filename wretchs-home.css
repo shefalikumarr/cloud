@@ -1,0 +1,222 @@
+/* Wretch's Home Page - No Sidebar */
+
+.wretchs-home-bg {
+    background: #0a0a0a;
+    min-height: 100vh;
+    font-family: 'Thonburi', sans-serif;
+    color: #fff;
+    position: relative;
+}
+
+.wretchs-home-bg::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: var(--wretchs-bg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    opacity: 0.15;
+    z-index: -2;
+}
+
+.wretchs-home-bg::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Header */
+.wretchs-header {
+    padding: 2rem 3vw;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.back-link {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: #fff;
+}
+
+.wretchs-title {
+    font-size: 1.8rem;
+    font-weight: normal;
+    opacity: 0.9;
+    margin: 0;
+    letter-spacing: 0.02em;
+}
+
+/* Main Content */
+.wretchs-content {
+    padding: 0 3vw 4rem;
+}
+
+/* Image Row - Full image left, fragments right */
+.image-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 4rem;
+    align-items: start;
+}
+
+.image-row:nth-child(even) {
+    direction: rtl;
+}
+
+.image-row:nth-child(even) > * {
+    direction: ltr;
+}
+
+/* Full Image (Left side) */
+.full-image {
+    position: relative;
+}
+
+.full-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Fragments Grid (Right side) */
+.fragments-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 1rem;
+    justify-content: center;
+    align-content: start;
+    min-height: 300px;
+}
+
+.fragment {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    animation: fadeIn 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+.fragment img {
+    display: block;
+    max-width: 180px;
+    max-height: 180px;
+    width: auto;
+    height: auto;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fragment:hover {
+    z-index: 10;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+}
+
+.fragment:hover img {
+    filter: brightness(1.1);
+}
+
+/* Frankenstein word overlay */
+.word-overlay {
+    position: absolute;
+    color: #cc0000;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(200, 0, 0, 0.8), 0 0 20px rgba(150, 0, 0, 0.5);
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease-in, opacity 2s ease-out 0.5s;
+    z-index: 20;
+    white-space: nowrap;
+    letter-spacing: 0.1em;
+}
+
+.word-overlay.visible {
+    opacity: 1;
+    animation: wordFade 2.5s ease-out forwards;
+}
+
+@keyframes wordFade {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    20% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .image-row {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .image-row:nth-child(even) {
+        direction: ltr;
+    }
+    
+    .fragments-grid {
+        min-height: auto;
+    }
+    
+    .wretchs-title {
+        font-size: 1.4rem;
+    }
+    
+    .wretchs-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .fragment img {
+        max-width: 120px;
+        max-height: 120px;
+    }
+    
+    .wretchs-header {
+        padding: 1.5rem 4vw;
+    }
+    
+    .wretchs-content {
+        padding: 0 4vw 3rem;
+    }
+}

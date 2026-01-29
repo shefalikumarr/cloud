@@ -1,0 +1,128 @@
+/* Shared Sidebar Styles */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 220px;
+    padding: 2rem 1.5rem;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    font-family: 'Thonburi', sans-serif;
+}
+
+.sidebar .site-title {
+    font-size: 1.8rem;
+    font-weight: normal;
+    margin: 0 0 2.5rem;
+    opacity: 0.9;
+    color: #fff;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+}
+
+.sidebar .nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    opacity: 0.75;
+    transition: all 0.3s;
+}
+
+.sidebar .nav-link:hover {
+    opacity: 1;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.sidebar .nav-link.active {
+    opacity: 1;
+    border-left: 2px solid #fff;
+    padding-left: 0.5rem;
+}
+
+/* Tour Link */
+.sidebar .tour-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    opacity: 0.6;
+    transition: all 0.3s;
+    margin-top: auto;
+}
+
+.sidebar .tour-link:hover {
+    opacity: 1;
+}
+
+/* Main content offset */
+.page-with-sidebar {
+    margin-left: 220px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .sidebar {
+        width: 180px;
+        padding: 1.5rem 1rem;
+    }
+    
+    .page-with-sidebar {
+        margin-left: 180px;
+    }
+}
+
+@media (max-width: 700px) {
+    .sidebar {
+        position: fixed;
+        width: 100%;
+        height: auto;
+        bottom: 0;
+        top: auto;
+        left: 0;
+        right: 0;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0.75rem;
+        border-right: none;
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .sidebar .site-title,
+    .sidebar .tour-link {
+        display: none;
+    }
+    
+    .sidebar-nav {
+        flex-direction: row;
+        gap: 1rem;
+        margin: 0;
+    }
+    
+    .sidebar .nav-link {
+        font-size: 0.9rem;
+    }
+    
+    .sidebar .nav-link.active {
+        border-left: none;
+        border-bottom: 2px solid #fff;
+        padding-left: 0;
+        padding-bottom: 0.25rem;
+    }
+    
+    .page-with-sidebar {
+        margin-left: 0;
+        margin-bottom: 60px;
+    }
+}

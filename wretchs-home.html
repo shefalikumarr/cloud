@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wretch's House is a Home to Me - shefali</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="wretchs-home.css">
+</head>
+<body class="wretchs-home-bg">
+    <header class="wretchs-header">
+        <a href="livingroom.html" class="back-link">← back</a>
+        <h1 class="wretchs-title">the wretch's house is a home to me</h1>
+    </header>
+
+    <main class="wretchs-content">
+        <!-- Image 1: DSCF9503_nchrtm -->
+        <div class="image-row">
+            <div class="full-image">
+                <img src="https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto,w_800/DSCF9503_nchrtm" alt="The Wretch's Home 1">
+            </div>
+            <div class="fragments-grid" data-image="DSCF9503_nchrtm"></div>
+        </div>
+
+        <!-- Image 2: DSCF9507_atenc0 -->
+        <div class="image-row">
+            <div class="full-image">
+                <img src="https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto,w_800/DSCF9507_atenc0" alt="The Wretch's Home 2">
+            </div>
+            <div class="fragments-grid" data-image="DSCF9507_atenc0"></div>
+        </div>
+
+        <!-- Image 3: DSCF9480_yor7mi -->
+        <div class="image-row">
+            <div class="full-image">
+                <img src="https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto,w_800/DSCF9480_yor7mi" alt="The Wretch's Home 3">
+            </div>
+            <div class="fragments-grid" data-image="DSCF9480_yor7mi"></div>
+        </div>
+
+        <!-- Image 4: DSCF9535_kfb0oa -->
+        <div class="image-row">
+            <div class="full-image">
+                <img src="https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto,w_800/DSCF9535_kfb0oa" alt="The Wretch's Home 4">
+            </div>
+            <div class="fragments-grid" data-image="DSCF9535_kfb0oa"></div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set background
+            const url = 'https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto/DSCF9503_nchrtm';
+            document.body.style.setProperty('--wretchs-bg', `url('${url}')`);
+
+            // Frankenstein quotes (public domain - Mary Shelley, 1818)
+            const frankensteinWords = [
+                'wretch', 'creature', 'monster', 'daemon', 'fiend',
+                'misery', 'solitude', 'despair', 'anguish', 'torment',
+                'darkness', 'horror', 'fear', 'hatred', 'revenge',
+                'abandoned', 'forsaken', 'alone', 'outcast', 'hideous',
+                'creator', 'father', 'life', 'death', 'soul',
+                'heart', 'fire', 'ice', 'night', 'shadow',
+                'wretched', 'accursed', 'miserable', 'unhappy', 'desolate'
+            ];
+
+            // Function to show word on fragment hover
+            function showWord(fragment) {
+                // Remove any existing word overlay
+                const existing = fragment.querySelector('.word-overlay');
+                if (existing) existing.remove();
+                
+                // Create word overlay
+                const overlay = document.createElement('div');
+                overlay.className = 'word-overlay';
+                
+                // Pick random word
+                const word = frankensteinWords[Math.floor(Math.random() * frankensteinWords.length)];
+                overlay.textContent = word;
+                
+                // Random position within the fragment
+                overlay.style.top = Math.floor(Math.random() * 60) + 20 + '%';
+                overlay.style.left = Math.floor(Math.random() * 60) + 20 + '%';
+                
+                fragment.appendChild(overlay);
+                
+                // Trigger animation
+                requestAnimationFrame(() => {
+                    overlay.classList.add('visible');
+                });
+            }
+
+            // Generate random fragments for each image
+            const fragmentGrids = document.querySelectorAll('.fragments-grid');
+            
+            fragmentGrids.forEach(grid => {
+                const imageId = grid.dataset.image;
+                const baseUrl = `https://res.cloudinary.com/djfrhmsgw/image/upload`;
+                
+                // Generate 6-9 random fragments
+                const numFragments = Math.floor(Math.random() * 4) + 6;
+                
+                for (let i = 0; i < numFragments; i++) {
+                    const fragment = document.createElement('div');
+                    fragment.className = 'fragment';
+                    
+                    // Random crop parameters
+                    const cropWidth = Math.floor(Math.random() * 300) + 150; // 150-450px
+                    const cropHeight = Math.floor(Math.random() * 300) + 150;
+                    const xOffset = Math.floor(Math.random() * 800);
+                    const yOffset = Math.floor(Math.random() * 600);
+                    
+                    // Random rotation and size
+                    const rotation = Math.floor(Math.random() * 30) - 15; // -15 to 15 degrees
+                    const scale = 0.8 + Math.random() * 0.4; // 0.8 to 1.2
+                    
+                    // Cloudinary crop transformation
+                    const cropUrl = `${baseUrl}/c_crop,w_${cropWidth},h_${cropHeight},x_${xOffset},y_${yOffset}/q_auto/${imageId}`;
+                    
+                    fragment.innerHTML = `<img src="${cropUrl}" alt="Fragment">`;
+                    fragment.style.transform = `rotate(${rotation}deg) scale(${scale})`;
+                    fragment.style.animationDelay = `${i * 0.1}s`;
+                    
+                    // Add hover listener for word effect
+                    fragment.addEventListener('mouseenter', () => showWord(fragment));
+                    
+                    grid.appendChild(fragment);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

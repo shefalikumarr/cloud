@@ -66,8 +66,8 @@
 }
 
 .essay-preview:hover {
-    border-color: var(--accent-color);
-    transform: translateX(5px);
+    border-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 0, 0, 0.3);
 }
 
 .essay-title {

@@ -3,17 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explorations - shefali</title>
+    <title>Projects - shefali</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="sidebar.css">
     <link rel="stylesheet" href="explorations.css">
 </head>
 <body class="explorations-page">
-    <nav class="directory-nav">
-        <a href="livingroom.html" class="path-segment">main</a>
-        <span class="path-separator">/</span>
-        <span class="current-path">explorations</span>
-    </nav>
-    <main class="explorations-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h1 class="site-title">shefali</h1>
+        <nav class="sidebar-nav">
+            <a href="livingroom.html" class="nav-link">/home</a>
+            <a href="diningroom.html" class="nav-link">/photography</a>
+            <a href="essays.html" class="nav-link">/essays</a>
+            <a href="explorations.html" class="nav-link active">/projects</a>
+            <a href="desktop.html" class="nav-link">/desktop</a>
+        </nav>
+        <a href="guided_tour.html" class="tour-link">take a guided tour →</a>
+    </aside>
+
+    <main class="explorations-container page-with-sidebar">
         <div class="projects-grid">
             <article class="project-card">
                 <h2 class="project-title"><a href="https://you-have-time-calendar.vercel.app" target="_blank">☆you have time☆</a> <span class="project-status">constantly evolving</span></h2>

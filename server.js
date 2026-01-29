@@ -106,6 +106,39 @@ app.get('/api/images', async (req, res) => {
     }
 });
 
+// Endpoint to get images from the_wretchs_home folder
+app.get('/api/wretchs-home-images', async (req, res) => {
+    try {
+        console.log('Fetching wretchs home images from Cloudinary...');
+        const result = await cloudinary.search
+            .expression('folder:website/the_wretchs_home')
+            .with_field('context')
+            .max_results(100)
+            .execute();
+
+        console.log('Found wretchs home resources:', result.resources.length);
+        const signedUrls = result.resources.map(resource => {
+            const thumbnailUrl = cloudinary.url(resource.public_id, {
+                sign_url: true,
+                secure: true,
+                transformation: [
+                    { width: 1200, crop: 'limit' },
+                    { quality: "auto" }
+                ]
+            });
+            return {
+                url: thumbnailUrl,
+                alt: resource.context?.custom?.title || 'Gallery image',
+                publicId: resource.public_id
+            };
+        });
+        res.json(signedUrls);
+    } catch (error) {
+        console.error('Error fetching wretchs home images:', error);
+        res.status(500).json({ error: 'Failed to fetch images' });
+    }
+});
+
 // Endpoint to get signed URLs for guided tour images by tag
 // Usage: /api/guided-tour-images?tag=short_tour or medium_tour or long_tour
 app.get('/api/guided-tour-images', async (req, res) => {
