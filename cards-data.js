@@ -77,6 +77,18 @@ const CARDS_DATA = {
             excerpt: 'A no strings attached image resizer built as a byproduct of needing to resize my gigantic (25mb+) digital camera photos down to 10mb for one reason or another. No storage, no ads, no tracking.',
             description: 'A no strings attached image resizer built as a byproduct of needing to resize my gigantic (25mb+) digital camera photos down to 10mb for various websites. No storage, no ads, no tracking - just a simple tool that does one thing well.',
             imageId: 'Screenshot_2026-01-28_at_11.00.07_PM_gpmupd'
+        },
+        {
+            id: 'project-image-stretcher',
+            category: 'project',
+            order: 4,
+            title: 'no gotcha image stretcher',
+            url: 'https://shefalikumarr.github.io/no_gotcha_image_resizer/stretcher.html',
+            status: 'complete',
+            techTags: ['HTML', 'JavaScript'],
+            excerpt: 'A no strings attached image stretcher for squeezing or stretching images to any dimensions. Same philosophy as the resizer - no storage, no ads, no tracking.',
+            description: 'A no strings attached image stretcher for squeezing or stretching images to any dimensions. Same philosophy as the resizer - no storage, no ads, no tracking.',
+            imageId: 'Screenshot_2026-01-29_at_12.09.52_AM_pltxrq'
         }
     ],
 
