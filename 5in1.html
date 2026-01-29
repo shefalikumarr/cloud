@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1in4/4in1 - shefali</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="5in1.css">
+</head>
+<body class="fivein1-bg">
+    <header class="fivein1-header">
+        <a href="diningroom.html" class="back-link">← back to photography</a>
+        <h1 class="fivein1-title">1in4/4in1</h1>
+    </header>
+
+    <main class="fivein1-content">
+        <p class="fivein1-instructions">click an outlined region to see the detail</p>
+        
+        <div class="diagram-container">
+            <!-- Main image with outlined regions -->
+            <div class="main-image-wrapper">
+                <img src="https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto,w_700/DSCF4883-2_lastzl" alt="1in4/4in1" class="main-image" id="mainImage">
+                
+                <!-- SVG overlay for outlined regions -->
+                <svg class="outline-overlay" id="outlineOverlay" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <!-- Region 1 - top left (DSCF4881_ltsqcy) -->
+                    <rect class="region" data-index="0" x="4" y="6" width="16" height="21" rx="0.5"/>
+                    <text class="region-label" x="12" y="18" text-anchor="middle" data-index="0">1</text>
+                    <!-- Region 2 - second box (DSCF4881_luqlfm) -->
+                    <rect class="region" data-index="1" x="29" y="22" width="13" height="16" rx="0.5"/>
+                    <text class="region-label" x="35.5" y="31" text-anchor="middle" data-index="1">2</text>
+                    <!-- Region 3 - third box (DSCF4881_lxcy1b) -->
+                    <rect class="region" data-index="2" x="43" y="45" width="18" height="18" rx="0.5"/>
+                    <text class="region-label" x="52" y="56" text-anchor="middle" data-index="2">3</text>
+                    <!-- Region 4 - bottom box (DSCF4881_zdulbb) -->
+                    <rect class="region" data-index="3" x="39" y="78" width="10" height="12" rx="0.5"/>
+                    <text class="region-label" x="44" y="86" text-anchor="middle" data-index="3">4</text>
+                </svg>
+            </div>
+
+            <!-- Callout panel that slides out from the side -->
+            <div class="callout-panel" id="calloutPanel">
+                <div class="callout-connector">
+                    <svg class="connector-svg" viewBox="0 0 60 100" preserveAspectRatio="none">
+                        <path class="connector-path" d="M 0 50 L 60 50" stroke="rgba(255,255,255,0.4)" stroke-width="1" fill="none" stroke-dasharray="4,4"/>
+                    </svg>
+                </div>
+                <div class="callout-content">
+                    <button class="callout-close" id="calloutClose">&times;</button>
+                    <img src="" alt="Detail" id="calloutImage">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const closeups = [
+                'DSCF4881_ltsqcy',  // top left
+                'DSCF4881_luqlfm',  // second box
+                'DSCF4881_lxcy1b',  // third box
+                'DSCF4881_zdulbb'   // bottom box
+            ];
+
+            const regions = document.querySelectorAll('.region');
+            const calloutPanel = document.getElementById('calloutPanel');
+            const calloutImage = document.getElementById('calloutImage');
+            const calloutClose = document.getElementById('calloutClose');
+            const mainImageWrapper = document.querySelector('.main-image-wrapper');
+            const connectorPath = document.querySelector('.connector-path');
+
+            let activeRegion = null;
+
+            regions.forEach((region, index) => {
+                region.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    
+                    // Remove active from previous
+                    if (activeRegion) {
+                        activeRegion.classList.remove('active');
+                    }
+                    
+                    // Set new active
+                    this.classList.add('active');
+                    activeRegion = this;
+                    
+                    // Load closeup image
+                    const imageId = closeups[index];
+                    calloutImage.src = `https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto,w_600/${imageId}`;
+                    
+                    // Get region position for connector line
+                    const rect = this.getBoundingClientRect();
+                    const wrapperRect = mainImageWrapper.getBoundingClientRect();
+                    
+                    // Calculate relative Y position (as percentage)
+                    const regionCenterY = ((rect.top + rect.height / 2) - wrapperRect.top) / wrapperRect.height * 100;
+                    
+                    // Update connector path
+                    connectorPath.setAttribute('d', `M 0 ${regionCenterY} L 60 50`);
+                    
+                    // Show callout
+                    calloutPanel.classList.add('active');
+                });
+            });
+
+            function closeCallout() {
+                calloutPanel.classList.remove('active');
+                if (activeRegion) {
+                    activeRegion.classList.remove('active');
+                    activeRegion = null;
+                }
+            }
+
+            calloutClose.addEventListener('click', closeCallout);
+
+            // Close when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.callout-panel') && !e.target.closest('.region')) {
+                    closeCallout();
+                }
+            });
+
+            // Close on escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeCallout();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

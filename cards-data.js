@@ -106,11 +106,11 @@ const CARDS_DATA = {
             id: 'photo-5in1',
             category: 'photo',
             order: 5,
-            label: 'exhibit b; /5in1 or 1in5',
+            label: 'exhibit b; /1in4 or 4in1',
             imageId: 'DSCF4881_zdulbb.jpg',
-            alt: '5in1 or 1in5',
-            link: null,
-            isGalleryLink: false
+            alt: '1in4 or 4in1',
+            link: '5in1.html',
+            isGalleryLink: true
         },
         {
             id: 'photo-people',
