@@ -1,25 +1,74 @@
 /* Comic Book Style - Watermelon Scene */
 
 .comic-bg {
-    background: #f5f0e6;
+    background: #111;
     min-height: 100vh;
     font-family: 'Thonburi', sans-serif;
     position: relative;
+    overflow-x: hidden;
 }
 
 .comic-bg::before {
     content: '';
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: var(--comic-bg);
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    opacity: 0.08;
+    top: 50%;
+    left: 50%;
+    width: 200vmax;
+    height: 200vmax;
+    transform: translate(-50%, -50%);
+    background: conic-gradient(
+        from 0deg,
+        #1a0a2e,
+        #16213e,
+        #0f3460,
+        #1a5f4a,
+        #2d6a4f,
+        #606c38,
+        #7b2d26,
+        #6b2737,
+        #4a1942,
+        #1a0a2e
+    );
+    animation: psychedelic-spin 20s linear infinite;
+    z-index: -2;
+}
+
+.comic-bg::after {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 150vmax;
+    height: 150vmax;
+    transform: translate(-50%, -50%);
+    background: conic-gradient(
+        from 180deg,
+        #0d0d0d,
+        #1a0a2e,
+        #2d1b4e,
+        #1e3a5f,
+        #1a5f4a,
+        #3d5a3d,
+        #5c3d2e,
+        #4a2040,
+        #2d1b4e,
+        #0d0d0d
+    );
+    animation: psychedelic-spin 15s linear infinite reverse;
     z-index: -1;
+    opacity: 0.7;
+}
+
+@keyframes psychedelic-spin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) rotate(180deg) scale(1.1);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg) scale(1);
+    }
 }
 
 /* Header */
@@ -33,25 +82,26 @@
     position: absolute;
     left: 2rem;
     top: 2rem;
-    color: #333;
+    color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
     font-size: 0.9rem;
     transition: color 0.2s;
 }
 
 .comic-header .back-link:hover {
-    color: #666;
+    color: #fff;
 }
 
 .comic-title {
     font-size: 1.8rem;
     font-weight: normal;
-    color: #1a1a1a;
+    color: #fff;
     margin: 0;
     padding: 1rem 2rem;
     display: inline-block;
-    background: #fff;
-    border: 3px solid #1a1a1a;
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
 }
 
 /* Comic Content */
@@ -62,21 +112,22 @@
 }
 
 .comic-page {
-    background: #fff;
-    border: 6px solid #1a1a1a;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     padding: 1.5rem;
-    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    backdrop-filter: blur(5px);
 }
 
 /* Comic Panels */
 .comic-panel {
-    border: 3px solid #1a1a1a;
+    border: 2px solid rgba(255, 255, 255, 0.2);
     overflow: hidden;
     position: relative;
-    background: #fff;
+    background: #000;
 }
 
 .comic-panel img {
