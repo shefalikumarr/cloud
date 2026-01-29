@@ -59,7 +59,8 @@ const CARDS_DATA = {
             status: 'constantly evolving',
             techTags: ['React', 'Vite', 'Vercel/AWS', 'JavaScript', 'Systems Design', 'Databases', 'UI/UX Design', '0-100'],
             excerpt: 'A calendar and task manager created to address personal pain points with existing tooling (and just cause I can).',
-            description: 'A calendar and task manager created to address personal pain points with existing tooling. Built to support both short-term and long-term planning in a way that makes sense to me, while also deepening personal technical breadth.'
+            description: 'A calendar and task manager created to address personal pain points with existing tooling. Built to support both short-term and long-term planning in a way that makes sense to me, while also deepening personal technical breadth.',
+            imageId: 'Screenshot_2026-01-28_at_11.02.59_PM_xzsfkc'
         },
         {
             id: 'project-image-resizer',
@@ -70,7 +71,8 @@ const CARDS_DATA = {
             status: 'complete',
             techTags: ['HTML', 'JavaScript'],
             excerpt: 'A no strings attached image resizer built as a byproduct of needing to resize my gigantic (25mb+) digital camera photos down to 10mb for one reason or another. No storage, no ads, no tracking.',
-            description: 'A no strings attached image resizer built as a byproduct of needing to resize my gigantic (25mb+) digital camera photos down to 10mb for various websites. No storage, no ads, no tracking - just a simple tool that does one thing well.'
+            description: 'A no strings attached image resizer built as a byproduct of needing to resize my gigantic (25mb+) digital camera photos down to 10mb for various websites. No storage, no ads, no tracking - just a simple tool that does one thing well.',
+            imageId: 'Screenshot_2026-01-28_at_11.00.07_PM_gpmupd'
         }
     ],
 
@@ -185,6 +187,22 @@ const CardRenderers = {
             const titleHtml = project.url 
                 ? `<a href="${project.url}" target="_blank">${project.title}</a>`
                 : project.title;
+            
+            // If project has an image, render as photo-style tile with background
+            if (project.imageId) {
+                const imageUrl = getCloudinaryUrl(project.imageId);
+                return `
+                    <article class="content-tile tile-project tile-project-with-image" data-category="project" data-order="${project.order}" style="background-image: url('${imageUrl}'); background-size: cover; background-position: center;">
+                        <span class="tile-tag tag-project">project</span>
+                        <div class="tile-content tile-content-overlay">
+                            <h3 class="tile-title">${titleHtml}</h3>
+                            <div class="tech-tags">${techTagsHtml}</div>
+                            <p class="tile-excerpt">${project.excerpt}</p>
+                        </div>
+                    </article>
+                `;
+            }
+            
             return `
                 <article class="content-tile tile-project" data-category="project" data-order="${project.order}">
                     <span class="tile-tag tag-project">project</span>
@@ -200,11 +218,20 @@ const CardRenderers = {
             const titleHtml = project.url 
                 ? `<a href="${project.url}" target="_blank">${project.title}</a>`
                 : project.title;
+            
+            // If project has an image, include it in full view
+            const imageHtml = project.imageId 
+                ? `<img src="${getCloudinaryUrl(project.imageId, 800)}" alt="${project.title}" class="project-image">`
+                : '';
+            
             return `
-                <article class="project-card">
-                    <h2 class="project-title">${titleHtml} <span class="project-status">${project.status}</span></h2>
-                    <div class="tech-stack">${allTagsHtml}</div>
-                    <p class="project-description">${project.description}</p>
+                <article class="project-card${project.imageId ? ' project-card-with-image' : ''}">
+                    ${imageHtml}
+                    <div class="project-card-content">
+                        <h2 class="project-title">${titleHtml} <span class="project-status">${project.status}</span></h2>
+                        <div class="tech-stack">${allTagsHtml}</div>
+                        <p class="project-description">${project.description}</p>
+                    </div>
                 </article>
             `;
         }

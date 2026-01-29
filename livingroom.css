@@ -135,6 +135,36 @@
     background: rgba(245, 240, 255, 0.55);
 }
 
+/* Project tiles with background image */
+.tile-project-with-image {
+    position: relative;
+    background-color: transparent;
+    min-height: 280px;
+}
+
+.tile-project-with-image .tile-content-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+    padding: 3rem 1.5rem 1.5rem;
+}
+
+.tile-project-with-image .tile-title,
+.tile-project-with-image .tile-title a {
+    color: #fff;
+}
+
+.tile-project-with-image .tile-excerpt {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.tile-project-with-image .tech-tag {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
+
 /* About Tile - special styling */
 .tile-about {
     background: rgba(255, 255, 255, 0.6);
