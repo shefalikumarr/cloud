@@ -1,0 +1,235 @@
+/* Comic Book Style - Watermelon Scene */
+
+.comic-bg {
+    background: #f5f0e6;
+    min-height: 100vh;
+    font-family: 'Comic Sans MS', 'Marker Felt', 'Chalkboard', sans-serif;
+    position: relative;
+}
+
+.comic-bg::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: var(--comic-bg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    opacity: 0.08;
+    z-index: -1;
+}
+
+/* Header */
+.comic-header {
+    padding: 2rem 3rem;
+    text-align: center;
+    position: relative;
+}
+
+.comic-header .back-link {
+    position: absolute;
+    left: 2rem;
+    top: 2rem;
+    color: #333;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-family: 'Thonburi', sans-serif;
+    transition: color 0.2s;
+}
+
+.comic-header .back-link:hover {
+    color: #e63946;
+}
+
+.comic-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 3px 3px 0 #ffeb3b, 5px 5px 0 #e63946;
+    margin: 0;
+    padding: 1rem 2rem;
+    display: inline-block;
+    background: #fff;
+    border: 4px solid #1a1a1a;
+    transform: rotate(-1deg);
+}
+
+/* Comic Content */
+.comic-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.comic-page {
+    background: #fff;
+    border: 6px solid #1a1a1a;
+    padding: 1.5rem;
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Comic Panels */
+.comic-panel {
+    border: 4px solid #1a1a1a;
+    overflow: hidden;
+    position: relative;
+    background: #fff;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.15);
+}
+
+.comic-panel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.comic-panel:hover img {
+    transform: scale(1.02);
+}
+
+/* Panel Sizes */
+.panel-large {
+    width: 100%;
+    aspect-ratio: 16/9;
+}
+
+.panel-medium {
+    flex: 1;
+    aspect-ratio: 4/3;
+}
+
+.panel-small {
+    flex: 1;
+    aspect-ratio: 1/1;
+}
+
+/* Comic Rows */
+.comic-row {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Special Finale Panel */
+.panel-finale {
+    position: relative;
+}
+
+.the-end {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 
+        2px 2px 0 #1a1a1a,
+        -2px -2px 0 #1a1a1a,
+        2px -2px 0 #1a1a1a,
+        -2px 2px 0 #1a1a1a;
+    background: #e63946;
+    padding: 0.5rem 1.5rem;
+    border: 3px solid #1a1a1a;
+    transform: rotate(3deg);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Halftone dot effect on hover */
+.comic-panel::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(circle, rgba(0,0,0,0.1) 1px, transparent 1px);
+    background-size: 4px 4px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.comic-panel:hover::after {
+    opacity: 1;
+}
+
+/* Speech bubble styling (for potential future additions) */
+.speech-bubble {
+    position: absolute;
+    background: #fff;
+    border: 3px solid #1a1a1a;
+    border-radius: 20px;
+    padding: 1rem;
+    font-size: 1rem;
+    max-width: 200px;
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 30px;
+    border: 10px solid transparent;
+    border-top-color: #1a1a1a;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .comic-title {
+        font-size: 1.5rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .comic-header .back-link {
+        position: relative;
+        display: block;
+        margin-bottom: 1rem;
+        left: 0;
+        top: 0;
+    }
+
+    .comic-page {
+        padding: 0.75rem;
+        gap: 0.5rem;
+    }
+
+    .comic-row {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .panel-medium,
+    .panel-small {
+        aspect-ratio: 4/3;
+    }
+
+    .the-end {
+        font-size: 1.2rem;
+        padding: 0.3rem 0.8rem;
+        bottom: 1rem;
+        right: 1rem;
+    }
+}
+
+/* Fun caption style */
+.panel-caption {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    background: #ffeb3b;
+    color: #1a1a1a;
+    padding: 0.3rem 0.6rem;
+    font-weight: bold;
+    font-size: 0.8rem;
+    border: 2px solid #1a1a1a;
+    transform: rotate(-2deg);
+}

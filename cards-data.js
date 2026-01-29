@@ -123,6 +123,16 @@ const CARDS_DATA = {
             isGalleryLink: false
         },
         {
+            id: 'photo-watermelon',
+            category: 'photo',
+            order: 2,
+            label: 'scene: finding out the watermelon you bought is yellow',
+            imageId: '749603EF-6C28-4EEF-A1C8-B61200813F31_xdkkfb',
+            alt: 'Yellow Watermelon Scene',
+            link: 'watermelon.html',
+            isGalleryLink: true
+        },
+        {
             id: 'photo-full-gallery',
             category: 'photo',
             order: 10,
