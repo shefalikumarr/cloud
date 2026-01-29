@@ -7,6 +7,7 @@ const CARDS_DATA = {
         id: 'about',
         category: 'about',
         order: 0,
+        imageId: 'DSC00827_pgfocy',
         content: {
             excerpt: "Hi, I am Shefali. I am a software engineer and this is the stuff I do in my free time. I love photography, tinkering with new technology, and synthesizing my thoughts about it once in a while. Most recently, I have been working on a personal calendar with all the features I wish gcal had, and photography collections inspired by a summer I only sort of remember. Highlights on this page, left nav for more details.",
             socials: [
@@ -26,7 +27,8 @@ const CARDS_DATA = {
             title: 'Entering the Panopticon',
             date: 'September 2025',
             excerpt: 'A reflection on taking photography seriously, growing a TikTok following, and discovering what makes a photograph truly interesting.',
-            url: 'https://shefali999.substack.com/p/entering-the-panopticon'
+            url: 'https://shefali999.substack.com/p/entering-the-panopticon',
+            imageId: 'DSC02974_ojpe0v'
         },
         {
             id: 'essay-dilly-dally',
@@ -35,7 +37,8 @@ const CARDS_DATA = {
             title: 'I Found Time to Dilly-Dally',
             date: 'September 2025',
             excerpt: 'A poetic meditation on memory, inheritance, and the spaces we carry within us.',
-            url: 'https://shefali999.substack.com/p/i-found-time-to-dilly-dally'
+            url: 'https://shefali999.substack.com/p/i-found-time-to-dilly-dally',
+            imageId: 'DSCN2116_tokicx'
         },
         {
             id: 'essay-ai-arms-race',
@@ -44,7 +47,8 @@ const CARDS_DATA = {
             title: 'The AI Arms Race',
             date: 'February 2025',
             excerpt: 'Examining the current state of AI development and ethical considerations.',
-            url: 'https://shefali999.substack.com/p/the-ai-arms-race'
+            url: 'https://shefali999.substack.com/p/the-ai-arms-race',
+            imageId: 'DSC00933_qzsufd'
         }
     ],
 
@@ -140,9 +144,13 @@ function getCloudinaryUrl(imageId, width = 600) {
 // Render functions for different card types
 const CardRenderers = {
     renderAboutCard(data) {
+        const imageUrl = data.imageId ? getCloudinaryUrl(data.imageId, 800) : '';
+        const bgStyle = data.imageId ? `style="background-image: url('${imageUrl}'); background-size: 100% 100%; background-position: center;"` : '';
+        const tileClass = data.imageId ? 'content-tile tile-about tile-about-with-image' : 'content-tile tile-about';
+        
         return `
-            <article class="content-tile tile-about" data-category="about" data-order="${data.order}">
-                <div class="tile-content">
+            <article class="${tileClass}" data-category="about" data-order="${data.order}" ${bgStyle}>
+                <div class="tile-content tile-content-overlay">
                     <h3 class="tile-title"></h3>
                     <p class="tile-excerpt">${data.content.excerpt}</p>
                     <div class="social-icons">
@@ -163,6 +171,21 @@ const CardRenderers = {
 
     renderEssayCard(essay, variant = 'tile') {
         if (variant === 'tile') {
+            // If essay has an image, render with background
+            if (essay.imageId) {
+                const imageUrl = getCloudinaryUrl(essay.imageId);
+                return `
+                    <article class="content-tile tile-essay tile-essay-with-image" data-category="essay" data-order="${essay.order}" style="background-image: url('${imageUrl}'); background-size: cover; background-position: center;">
+                        <span class="tile-tag tag-essay">essay</span>
+                        <div class="tile-content tile-content-overlay">
+                            <h3 class="tile-title">${essay.title}</h3>
+                            <p class="tile-meta">${essay.date}</p>
+                            <p class="tile-excerpt">${essay.excerpt}</p>
+                            <a href="${essay.url}" class="tile-link" target="_blank">read →</a>
+                        </div>
+                    </article>
+                `;
+            }
             return `
                 <article class="content-tile tile-essay" data-category="essay" data-order="${essay.order}">
                     <span class="tile-tag tag-essay">essay</span>
