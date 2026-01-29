@@ -9,7 +9,7 @@ const CARDS_DATA = {
         order: 0,
         imageId: 'DSC00827_pgfocy',
         content: {
-            excerpt: "Hi, I am Shefali. I am a software engineer and this is the stuff I do in my free time. I love photography, tinkering with new technology, and synthesizing my thoughts about it once in a while. Most recently, I have been working on a personal calendar with all the features I wish gcal had, and photography collections inspired by a summer I only sort of remember. Highlights on this page, left nav for more details.",
+            excerpt: "Hi, I am Shefali. I am a software engineer and this is the stuff I do in my free time. I love photography, tinkering with new technology, and synthesizing my thoughts about it once in a while. Most recently, I have been working on a personal calendar with all the features I wish gcal had, and photography collections inspired by a summer I only sort of remember. Highlights on this page, nav for more in each category.",
             socials: [
                 { platform: 'instagram', url: 'https://instagram.com/cleaurpatra', handle: '@cleaurpatra' },
                 { platform: 'twitter', url: 'https://x.com/shef4li', handle: '@shef4li' },
@@ -112,7 +112,8 @@ const CARDS_DATA = {
             imageId: 'DSC04552_wsfjxp.jpg',
             alt: 'POV Summer',
             link: null,
-            isGalleryLink: false
+            isGalleryLink: false,
+            hideFromHome: true
         },
         {
             id: 'photo-5in1',
@@ -132,7 +133,8 @@ const CARDS_DATA = {
             imageId: 'DSCN0971_j757nb.jpg',
             alt: 'People',
             link: null,
-            isGalleryLink: false
+            isGalleryLink: false,
+            hideFromHome: true
         },
         {
             id: 'photo-watermelon',
@@ -345,7 +347,8 @@ function renderCards(containerId, options = {}) {
     const {
         categories = ['about', 'essay', 'project', 'photo'], // which categories to include
         variant = 'tile', // 'tile' or 'full'
-        sort = true // whether to sort by order
+        sort = true, // whether to sort by order
+        includeHidden = false // whether to include items with hideFromHome
     } = options;
 
     let cards = [];
@@ -362,6 +365,11 @@ function renderCards(containerId, options = {}) {
     }
     if (categories.includes('photo')) {
         CARDS_DATA.photos.forEach(p => cards.push({ ...p, type: 'photo' }));
+    }
+
+    // Filter out hidden items unless includeHidden is true
+    if (!includeHidden) {
+        cards = cards.filter(card => !card.hideFromHome);
     }
 
     // Sort by order if requested
