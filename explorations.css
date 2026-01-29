@@ -21,10 +21,9 @@
 }
 
 .explorations-container {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    margin-top: 4rem;
+    padding: 2rem 3rem;
+    max-width: 1000px;
+    margin-top: 2rem;
 }
 
 .explorations-header {
@@ -129,6 +128,10 @@
 }
 
 @media (max-width: 768px) {
+    .explorations-container {
+        padding: 1.5rem;
+    }
+    
     .projects-grid {
         grid-template-columns: 1fr;
     }
@@ -141,5 +144,11 @@
     
     .project-link {
         margin-left: 0;
+    }
+}
+
+@media (max-width: 900px) {
+    .explorations-container {
+        padding: 2rem 2rem;
     }
 }
