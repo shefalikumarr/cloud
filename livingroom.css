@@ -271,5 +271,5 @@ body.livingroom-bg::after {
 }
 .menu-list .menu-link:hover {
   opacity: 1;
-  padding-left: 0.5vw;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.5);
 }
