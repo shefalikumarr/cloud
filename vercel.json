@@ -1,0 +1,57 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.css",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "server.js"
+    },
+    {
+      "src": "^/$",
+      "dest": "/livingroom.html"
+    },
+    {
+      "src": "/(.*\\.css)",
+      "dest": "/$1",
+      "headers": {
+        "Content-Type": "text/css"
+      }
+    },
+    {
+      "src": "/(.*\\.js)",
+      "dest": "/$1",
+      "headers": {
+        "Content-Type": "application/javascript"
+      }
+    },
+    {
+      "src": "/(.*\\.html)",
+      "dest": "/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}

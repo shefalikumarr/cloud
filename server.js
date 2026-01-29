@@ -31,6 +31,9 @@ cloudinary.config({
 
 console.log('Starting server configuration...');
 
+// Serve static files first
+app.use(express.static(path.join(__dirname)));
+
 // Request logging middleware
 app.use((req, res, next) => {
     console.log('Incoming request:', {
@@ -193,9 +196,6 @@ app.get('/api/initial-images', async (req, res) => {
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'livingroom.html'));
 });
-
-// Serve static files
-app.use(express.static(path.join(__dirname)));
 
 // Error handling middleware
 app.use((err, req, res, next) => {
