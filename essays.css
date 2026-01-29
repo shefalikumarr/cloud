@@ -31,10 +31,9 @@
 }
 
 .essays-container {
-    padding: 2rem;
+    padding: 2rem 3rem;
     max-width: 800px;
-    margin: 0 auto;
-    margin-top: 4rem;
+    margin-top: 2rem;
 }
 
 .essays-header {

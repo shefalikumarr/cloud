@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="sidebar.css">
     <link rel="stylesheet" href="explorations.css">
+    <script src="cards-data.js"></script>
 </head>
 <body class="explorations-page">
     <!-- Sidebar -->
@@ -17,47 +18,25 @@
             <a href="diningroom.html" class="nav-link">/photography</a>
             <a href="essays.html" class="nav-link">/essays</a>
             <a href="explorations.html" class="nav-link active">/projects</a>
-            <a href="desktop.html" class="nav-link">/desktop</a>
         </nav>
-        <a href="guided_tour.html" class="tour-link">take a guided tour →</a>
     </aside>
 
     <main class="explorations-container page-with-sidebar">
-        <div class="projects-grid">
-            <article class="project-card">
-                <h2 class="project-title"><a href="https://you-have-time-calendar.vercel.app" target="_blank">☆you have time☆</a> <span class="project-status">constantly evolving</span></h2>
-                <div class="tech-stack">
-                    <span class="tech-tag">React</span>
-                    <span class="tech-tag">Vite</span>
-                    <span class="tech-tag">Vercel/AWS</span>
-                    <span class="tech-tag">Javascript</span>
-                    <span class="tech-tag">Systems Design</span>
-                    <span class="tech-tag">Databases</span>
-                    <span class="tech-tag">UI/UX Design</span>
-                    <span class="tech-tag">0-100</span>
-                </div>
-                <p class="project-description">
-                    A calendar and task manager created to address personal pain points with existing tooling. Built to support both short-term and long-term planning in a way that makes sense to me, while also deepening personal technical breadth.
-                </p>
-            </article>
-            <article class="project-card">
-                <h2 class="project-title">Curator <span class="project-status">Beta</span></h2>
-                <div class="tech-stack">
-                    <span class="tech-tag">Next.js</span>
-                    <span class="tech-tag">Cloudinary</span>
-                    <span class="tech-tag">TypeScript</span>
-                    <span class="tech-tag">TensorFlow.js</span>
-                </div>
-                <p class="project-description">
-                    An intuitive questionnaire that uses personality insights and aesthetic preferences to curate a personalized collection from my photography archive. Each selection tells a unique visual story.
-                </p>
-            </article>
+        <div class="projects-grid" id="projects-grid">
+            <!-- Projects will be rendered by JavaScript -->
         </div>
     </main>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const url = 'https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto/DSCF2589_skkem5.jpg';
             document.body.style.setProperty('--featured-image', `url('${url}')`);
+
+            // Render project cards from centralized data
+            renderCards('projects-grid', {
+                categories: ['project'],
+                variant: 'full',
+                sort: true
+            });
         });
     </script>
 </body>
