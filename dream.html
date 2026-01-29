@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I have this reoccuring dream often - shefali</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dream.css">
+</head>
+<body class="dream-bg">
+    <header class="dream-header">
+        <a href="diningroom.html" class="back-link">← back to photography</a>
+        <h1 class="dream-title">I have this reoccuring dream often</h1>
+    </header>
+
+    <main class="dream-content">
+        <div class="slideshow-container">
+            <div class="slide-wrapper">
+                <img src="" alt="Dream" class="slide-image" id="slideImage">
+            </div>
+            
+            <div class="slideshow-controls">
+                <button class="control-btn" id="prevBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <button class="control-btn" id="pauseBtn">
+                    <svg class="pause-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <rect x="6" y="4" width="4" height="16"></rect>
+                        <rect x="14" y="4" width="4" height="16"></rect>
+                    </svg>
+                    <svg class="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                </button>
+                <button class="control-btn" id="nextBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="slide-counter">
+                <span id="currentSlide">1</span> / <span id="totalSlides">10</span>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = [
+                '32_h3vktl',
+                '33_ne9s2v',
+                '34_tcut52',
+                '37_q9qwkx',
+                '36_tq1qpd',
+                '35_wodrqv',
+                '38_zgt6jp',
+                '39_f7xhse',
+                '40_bqm11t',
+                '41_vfb67p'
+            ];
+
+            const slideImage = document.getElementById('slideImage');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const pauseBtn = document.getElementById('pauseBtn');
+            const pauseIcon = pauseBtn.querySelector('.pause-icon');
+            const playIcon = pauseBtn.querySelector('.play-icon');
+            const currentSlideEl = document.getElementById('currentSlide');
+            const totalSlidesEl = document.getElementById('totalSlides');
+
+            let currentIndex = 0;
+            let isPlaying = true;
+            let intervalId = null;
+            const flashInterval = 2000; // 2 seconds per image
+
+            totalSlidesEl.textContent = images.length;
+
+            function getImageUrl(imageId) {
+                return `https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto,w_1200/${imageId}`;
+            }
+
+            function showSlide(index) {
+                // Add flash effect
+                slideImage.classList.add('flash');
+                
+                setTimeout(() => {
+                    slideImage.src = getImageUrl(images[index]);
+                    currentSlideEl.textContent = index + 1;
+                    slideImage.classList.remove('flash');
+                }, 100);
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % images.length;
+                showSlide(currentIndex);
+            }
+
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                showSlide(currentIndex);
+            }
+
+            function startAutoPlay() {
+                if (intervalId) clearInterval(intervalId);
+                intervalId = setInterval(nextSlide, flashInterval);
+                isPlaying = true;
+                pauseIcon.style.display = 'block';
+                playIcon.style.display = 'none';
+            }
+
+            function stopAutoPlay() {
+                if (intervalId) clearInterval(intervalId);
+                intervalId = null;
+                isPlaying = false;
+                pauseIcon.style.display = 'none';
+                playIcon.style.display = 'block';
+            }
+
+            function togglePlay() {
+                if (isPlaying) {
+                    stopAutoPlay();
+                } else {
+                    startAutoPlay();
+                }
+            }
+
+            // Event listeners
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                if (isPlaying) {
+                    startAutoPlay(); // Reset timer
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                if (isPlaying) {
+                    startAutoPlay(); // Reset timer
+                }
+            });
+
+            pauseBtn.addEventListener('click', togglePlay);
+
+            // Keyboard controls
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                    if (isPlaying) startAutoPlay();
+                } else if (e.key === 'ArrowRight') {
+                    nextSlide();
+                    if (isPlaying) startAutoPlay();
+                } else if (e.key === ' ') {
+                    e.preventDefault();
+                    togglePlay();
+                }
+            });
+
+            // Initialize
+            showSlide(0);
+            startAutoPlay();
+        });
+    </script>
+</body>
+</html>

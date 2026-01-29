@@ -133,6 +133,16 @@ const CARDS_DATA = {
             isGalleryLink: true
         },
         {
+            id: 'photo-dream',
+            category: 'photo',
+            order: 4,
+            label: 'I have this reoccuring dream often',
+            imageId: '33_ne9s2v',
+            alt: 'Reoccuring Dream',
+            link: 'dream.html',
+            isGalleryLink: true
+        },
+        {
             id: 'photo-full-gallery',
             category: 'photo',
             order: 10,

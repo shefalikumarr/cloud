@@ -1,0 +1,148 @@
+/* Dream Slideshow Page */
+
+.dream-bg {
+    background: #000;
+    min-height: 100vh;
+    font-family: 'Thonburi', sans-serif;
+    color: #fff;
+}
+
+/* Header */
+.dream-header {
+    padding: 2rem 3rem;
+    text-align: center;
+    position: relative;
+}
+
+.dream-header .back-link {
+    position: absolute;
+    left: 2rem;
+    top: 2rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.dream-header .back-link:hover {
+    color: #fff;
+}
+
+.dream-title {
+    font-size: 1.8rem;
+    font-weight: normal;
+    margin: 0;
+    font-style: italic;
+}
+
+/* Content */
+.dream-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem 3rem;
+}
+
+/* Slideshow Container */
+.slideshow-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 900px;
+    width: 100%;
+}
+
+.slide-wrapper {
+    position: relative;
+    width: 100%;
+    max-height: 70vh;
+    background: #111;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide-image {
+    max-width: 100%;
+    max-height: 70vh;
+    width: auto;
+    height: auto;
+    display: block;
+    transition: opacity 0.1s ease;
+    object-fit: contain;
+}
+
+.slide-image.flash {
+    opacity: 0;
+}
+
+/* Controls */
+.slideshow-controls {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    align-items: center;
+}
+
+.control-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.7);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.control-btn:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.control-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Slide Counter */
+.slide-counter {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.1em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dream-header .back-link {
+        position: relative;
+        display: block;
+        margin-bottom: 1rem;
+        left: 0;
+        top: 0;
+        text-align: center;
+    }
+
+    .dream-title {
+        font-size: 1.4rem;
+    }
+
+    .dream-content {
+        padding: 1rem;
+    }
+
+    .control-btn {
+        width: 44px;
+        height: 44px;
+    }
+
+    .slideshow-controls {
+        gap: 1rem;
+    }
+}
