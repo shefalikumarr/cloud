@@ -211,8 +211,25 @@ const CardRenderers = {
         return '';
     },
 
-    renderPhotoCard(photo) {
+    renderPhotoCard(photo, variant = 'tile') {
         const imageUrl = getCloudinaryUrl(photo.imageId);
+        
+        if (variant === 'diningroom') {
+            // Skip gallery links for diningroom view (only show exhibits)
+            if (photo.isFullGallery) return '';
+            
+            const linkWrapper = photo.link ? 
+                [`<a href="${photo.link}" class="diningroom-tile" style="position:relative;display:block;text-decoration:none;">`, `</a>`] :
+                [`<div class="diningroom-tile" style="position:relative;">`, `</div>`];
+            
+            return `
+                ${linkWrapper[0]}
+                    <img src="${imageUrl}" alt="${photo.alt}" style="width:100%;height:100%;object-fit:cover;">
+                    <div style="position:absolute;bottom:0;left:0;width:100%;background:rgba(0,0,0,0.32);color:#fff;text-align:center;font-size:1em;padding:0.4em 0;">${photo.label}</div>
+                ${linkWrapper[1]}
+            `;
+        }
+        
         const overlayClass = photo.isFullGallery ? 'tile-overlay tile-overlay-gallery' : 'tile-overlay';
         
         if (photo.link) {
@@ -284,7 +301,7 @@ function renderCards(containerId, options = {}) {
                 html += CardRenderers.renderProjectCard(card, variant);
                 break;
             case 'photo':
-                html += CardRenderers.renderPhotoCard(card);
+                html += CardRenderers.renderPhotoCard(card, variant);
                 break;
         }
     });

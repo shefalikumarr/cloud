@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="sidebar.css">
   <link rel="stylesheet" href="diningroom.css">
+  <script src="cards-data.js"></script>
 </head>
 <body class="diningroom-bg">
     <!-- Sidebar -->
@@ -27,19 +28,8 @@
     <a href="gallery.html" class="diningroom-link">/gallery</a> for even more.
   </div>
   <section class="diningroom-exhibitions">
-    <div class="diningroom-photo-row">
-      <div class="diningroom-tile" style="position:relative;">
-        <img src="https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto/DSC04552_wsfjxp.jpg" alt="Tile 1" style="width:100%;height:100%;object-fit:cover;">
-        <div style="position:absolute;bottom:0;left:0;width:100%;background:rgba(0,0,0,0.32);color:#fff;text-align:center;font-size:1em;padding:0.4em 0;">exhibit a; /POV summer</div>
-      </div>
-      <div class="diningroom-tile" style="position:relative;">
-        <img src="https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto/DSCF4881_zdulbb.jpg" alt="Tile 2" style="width:100%;height:100%;object-fit:cover;">
-        <div style="position:absolute;bottom:0;left:0;width:100%;background:rgba(0,0,0,0.32);color:#fff;text-align:center;font-size:1em;padding:0.4em 0;">exhibit b; /5in1 or 1in5</div>
-      </div>
-      <div class="diningroom-tile" style="position:relative;">
-        <img src="https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto/DSCN0971_j757nb.jpg" alt="Tile 3" style="width:100%;height:100%;object-fit:cover;">
-        <div style="position:absolute;bottom:0;left:0;width:100%;background:rgba(0,0,0,0.32);color:#fff;text-align:center;font-size:1em;padding:0.4em 0;">exhibit c; /people</div>
-      </div>
+    <div class="diningroom-photo-row" id="photo-row">
+      <!-- Photos will be rendered by JavaScript -->
     </div>
   </section>
   </div>
@@ -47,6 +37,13 @@
     document.addEventListener('DOMContentLoaded', function() {
       const url = 'https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto/DSC01480_iqzd4f.jpg';
       document.body.style.setProperty('--diningroom-bg', `url('${url}')`);
+
+      // Render photo cards from centralized data
+      renderCards('photo-row', {
+        categories: ['photo'],
+        variant: 'diningroom',
+        sort: true
+      });
     });
   </script>
 </body>
