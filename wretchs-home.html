@@ -53,6 +53,43 @@
             const url = 'https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto/DSCF9503_nchrtm';
             document.body.style.setProperty('--wretchs-bg', `url('${url}')`);
 
+            // Frankenstein quotes (public domain - Mary Shelley, 1818)
+            const frankensteinWords = [
+                'wretch', 'creature', 'monster', 'daemon', 'fiend',
+                'misery', 'solitude', 'despair', 'anguish', 'torment',
+                'darkness', 'horror', 'fear', 'hatred', 'revenge',
+                'abandoned', 'forsaken', 'alone', 'outcast', 'hideous',
+                'creator', 'father', 'life', 'death', 'soul',
+                'heart', 'fire', 'ice', 'night', 'shadow',
+                'wretched', 'accursed', 'miserable', 'unhappy', 'desolate'
+            ];
+
+            // Function to show word on fragment hover
+            function showWord(fragment) {
+                // Remove any existing word overlay
+                const existing = fragment.querySelector('.word-overlay');
+                if (existing) existing.remove();
+                
+                // Create word overlay
+                const overlay = document.createElement('div');
+                overlay.className = 'word-overlay';
+                
+                // Pick random word
+                const word = frankensteinWords[Math.floor(Math.random() * frankensteinWords.length)];
+                overlay.textContent = word;
+                
+                // Random position within the fragment
+                overlay.style.top = Math.floor(Math.random() * 60) + 20 + '%';
+                overlay.style.left = Math.floor(Math.random() * 60) + 20 + '%';
+                
+                fragment.appendChild(overlay);
+                
+                // Trigger animation
+                requestAnimationFrame(() => {
+                    overlay.classList.add('visible');
+                });
+            }
+
             // Generate random fragments for each image
             const fragmentGrids = document.querySelectorAll('.fragments-grid');
             
@@ -83,6 +120,9 @@
                     fragment.innerHTML = `<img src="${cropUrl}" alt="Fragment">`;
                     fragment.style.transform = `rotate(${rotation}deg) scale(${scale})`;
                     fragment.style.animationDelay = `${i * 0.1}s`;
+                    
+                    // Add hover listener for word effect
+                    fragment.addEventListener('mouseenter', () => showWord(fragment));
                     
                     grid.appendChild(fragment);
                 }
