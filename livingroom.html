@@ -3,52 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Living Room</title>
+    <title>shefali</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="sidebar.css">
     <link rel="stylesheet" href="livingroom.css">
 </head>
-<script src="livingroom.js"></script>
 <body class="livingroom-bg">
-        <div class="menu-tile">
-            <ul class="menu-list">
-                <li><a href="livingroom.html" class="menu-link">main</a></li>
-                <li><a href="diningroom.html" class="menu-link">/photography</a></li>
-                <li><a href="essays.html" class="menu-link">/essays</a></li>
-                <li><a href="explorations.html" class="menu-link">/projects</a></li>
-                <li><a href="desktop.html" class="menu-link">/desktop</a></li>
-            </ul>
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+        <h1 class="site-title">shefali</h1>
+        
+        <nav class="sidebar-nav">
+            <a href="livingroom.html" class="nav-link active">/home</a>
+            <a href="diningroom.html" class="nav-link">/photography</a>
+            <a href="essays.html" class="nav-link">/essays</a>
+            <a href="explorations.html" class="nav-link">/projects</a>
+            <a href="desktop.html" class="nav-link">/desktop</a>
+        </nav>
+
+        <div class="filters">
+            <h3 class="filters-title">filter</h3>
+            <label class="filter-option">
+                <input type="checkbox" value="essay" checked> essays
+            </label>
+            <label class="filter-option">
+                <input type="checkbox" value="photo" checked> photography
+            </label>
+            <label class="filter-option">
+                <input type="checkbox" value="project" checked> projects
+            </label>
         </div>
+
+        <a href="guided_tour.html" class="tour-link">take a guided tour →</a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content-stream">
+        <div class="tiles-container">
+            <!-- About/Hello Tile -->
+            <article class="content-tile tile-about" data-category="about" data-order="0">
+                <div class="tile-content">
+                    <h3 class="tile-title"></h3>
+                    <p class="tile-excerpt">Hi, I am Shefali. I am a software engineer and this is the stuff I do in my free time (sometimes). I love photography, tinkering with new technology, and synthesizing my thoughts about it once in a while. Most recently, I have been working on a personal calendar with all the features I wish gcal had, and photography collections inspired by a summer I only sort of remember. Highlights on this page, left nav for more details. </p>
+                    <div class="social-icons">
+                        <a href="https://instagram.com/cleaurpatra" target="_blank" class="social-link" title="Instagram">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="https://x.com/shef4li" target="_blank" class="social-link" title="Twitter/X">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="https://tiktok.com/@cleaurpatra201" target="_blank" class="social-link" title="TikTok">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Essay Tiles -->
+            <article class="content-tile tile-essay" data-category="essay" data-order="7">
+                <span class="tile-tag tag-essay">essay</span>
+                <div class="tile-content">
+                    <h3 class="tile-title">Entering the Panopticon</h3>
+                    <p class="tile-meta">September 2025</p>
+                    <p class="tile-excerpt">A reflection on taking photography seriously, growing a TikTok following, and discovering what makes a photograph truly interesting.</p>
+                    <a href="https://shefali999.substack.com/p/entering-the-panopticon" class="tile-link" target="_blank">read →</a>
+                </div>
+            </article>
+
+            <!-- Photo Tile -->
+            <article class="content-tile tile-photo" data-category="photo" data-order="3">
+                <span class="tile-tag tag-photo">photo</span>
+                <img src="https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto,w_600/DSC04552_wsfjxp.jpg" alt="POV Summer">
+                <div class="tile-overlay">
+                    <span class="tile-label">exhibit a; /POV summer</span>
+                </div>
+            </article>
+
+            <!-- Project Tile -->
+            <article class="content-tile tile-project" data-category="project" data-order="2">
+                <span class="tile-tag tag-project">project</span>
+                <div class="tile-content">
+                    <h3 class="tile-title"><a href="https://you-have-time-calendar.vercel.app" target="_blank">☆you have time☆</a></h3>
+                    <div class="tech-tags">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Vite</span>
+                        <span class="tech-tag">Vercel</span>
+                    </div>
+                    <p class="tile-excerpt">A calendar and task manager created to address personal pain points with existing tooling (and just cause I can).</p>
+                </div>
+            </article>
+
+            <!-- Essay Tile -->
+            <article class="content-tile tile-essay" data-category="essay" data-order="4">
+                <span class="tile-tag tag-essay">essay</span>
+                <div class="tile-content">
+                    <h3 class="tile-title">I Found Time to Dilly-Dally</h3>
+                    <p class="tile-meta">September 2025</p>
+                    <p class="tile-excerpt">A poetic meditation on memory, inheritance, and the spaces we carry within us.</p>
+                    <a href="https://shefali999.substack.com/p/i-found-time-to-dilly-dally" class="tile-link" target="_blank">read →</a>
+                </div>
+            </article>
+
+            <!-- Photo Tile -->
+            <article class="content-tile tile-photo" data-category="photo" data-order="5">
+                <span class="tile-tag tag-photo">photo</span>
+                <img src="https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto,w_600/DSCF4881_zdulbb.jpg" alt="5in1 or 1in5">
+                <div class="tile-overlay">
+                    <span class="tile-label">exhibit b; /5in1 or 1in5</span>
+                </div>
+            </article>
+
+            <!-- Essay Tile -->
+            <article class="content-tile tile-essay" data-category="essay" data-order="9">
+                <span class="tile-tag tag-essay">essay</span>
+                <div class="tile-content">
+                    <h3 class="tile-title">The AI Arms Race</h3>
+                    <p class="tile-meta">February 2025</p>
+                    <p class="tile-excerpt">Examining the current state of AI development and ethical considerations.</p>
+                    <a href="https://shefali999.substack.com/p/the-ai-arms-race" class="tile-link" target="_blank">read →</a>
+                </div>
+            </article>
+
+            <!-- Photo Tile -->
+            <article class="content-tile tile-photo" data-category="photo" data-order="6">
+                <span class="tile-tag tag-photo">photo</span>
+                <img src="https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto,w_600/DSCN0971_j757nb.jpg" alt="People">
+                <div class="tile-overlay">
+                    <span class="tile-label">exhibit c; /people</span>
+                </div>
+            </article>
+            <!-- Full Gallery Tile -->
+            <a href="gallery.html" class="content-tile tile-photo tile-gallery-link" data-category="photo" data-order="1">
+                <span class="tile-tag tag-photo">photo</span>
+                <img src="https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto,w_600/DSCF2064_o73ntf.jpg" alt="Gallery">
+                <div class="tile-overlay tile-overlay-gallery">
+                    <span class="tile-label">view full gallery →</span>
+                </div>
+            </a>        </div>
+    </main>
+
     <script>
-      // Set the background image from Cloudinary
-      document.addEventListener('DOMContentLoaded', function() {
-        const url = 'https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto/DSCF2064_o73ntf.jpg';
-        document.body.style.setProperty('--livingroom-bg', `url('${url}')`);
-      });
+        document.addEventListener('DOMContentLoaded', function() {
+            const url = 'https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto/DSCN0829_nmnblz.jpg';
+            document.body.style.setProperty('--livingroom-bg', `url('${url}')`);
+
+            const container = document.querySelector('.tiles-container');
+            const tiles = Array.from(container.querySelectorAll('.content-tile'));
+
+            // Sort tiles by data-order
+            function sortTiles() {
+                tiles.sort((a, b) => {
+                    return parseInt(a.dataset.order) - parseInt(b.dataset.order);
+                });
+                tiles.forEach(tile => container.appendChild(tile));
+            }
+
+            sortTiles();
+
+            // Filter functionality
+            const checkboxes = document.querySelectorAll('.filter-option input');
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const activeFilters = Array.from(checkboxes)
+                        .filter(cb => cb.checked)
+                        .map(cb => cb.value);
+
+                    tiles.forEach(tile => {
+                        const category = tile.dataset.category;
+                        // Always show "about" tile
+                        if (category === 'about' || activeFilters.includes(category)) {
+                            tile.style.display = '';
+                        } else {
+                            tile.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
     </script>
-
-<div class="bottom-corner-group">
-  <div class="site-warning">⚠︎ site under construction, some things might lead nowhere ⚠︎</div>
-  <a href="guided_tour.html" class="guided-tour-link">or take a guided tour -&gt;</a>
-</div>
-
-<!-- Guided Tour Modal Overlay -->
-<div id="guided-tour-modal" class="guided-tour-modal" style="display:none;">
-  <div class="guided-tour-fade" id="guided-tour-fade"></div>
-  <div class="guided-tour-content" id="guided-tour-content">
-    <div class="guided-tour-options" id="guided-tour-options">
-      <div class="guided-tour-title">How much would you like to see?</div>
-      <span class="guided-tour-option" data-choice="bit">/ just a bit</span>
-      <span class="guided-tour-option" data-choice="little">/ a little of everything</span>
-      <span class="guided-tour-option" data-choice="all">/ all that there is</span>
-    </div>
-    <div class="guided-tour-slideshow" id="guided-tour-slideshow" style="display:none;">
-      <img id="guided-tour-image" src="" alt="Tour Image" />
-      <div class="guided-tour-slideshow-controls">
-        <button id="guided-tour-prev">Prev</button>
-        <button id="guided-tour-next">Next</button>
-        <button id="guided-tour-exit">Exit</button>
-      </div>
-    </div>
-  </div>
-</div>
 </body>
 </html>
