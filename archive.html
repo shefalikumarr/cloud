@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>the archive - shefali</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="archive.css">
+</head>
+<body>
+    <header class="archive-header">
+        <a href="livingroom.html" class="back-link">← back to home</a>
+        <h1 class="archive-title">the archive</h1>
+        <a href="archive-editor.html" class="edit-link">edit</a>
+    </header>
+
+    <main class="magazine-reader">
+        <div class="spread-container">
+            <div class="page page-left" id="page-left"></div>
+            <div class="page page-right" id="page-right"></div>
+        </div>
+        <div class="reader-controls">
+            <button class="nav-btn" id="prev-btn" title="Previous spread">←</button>
+            <span class="page-indicator" id="page-indicator">1–2 of 2</span>
+            <button class="nav-btn" id="next-btn" title="Next spread">→</button>
+        </div>
+    </main>
+
+    <script src="archive.js"></script>
+    <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
+</body>
+</html>

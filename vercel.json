@@ -46,6 +46,14 @@
       }
     },
     {
+      "src": "/archive-editor",
+      "dest": "/archive-editor.html"
+    },
+    {
+      "src": "/archive",
+      "dest": "/archive.html"
+    },
+    {
       "src": "/(.*\\.html)",
       "dest": "/$1"
     },

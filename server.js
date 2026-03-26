@@ -44,13 +44,15 @@ app.use((req, res, next) => {
     next();
 });
 
-// Parse JSON bodies
-app.use(express.json());
+// Parse JSON bodies (increased limit for image uploads)
+app.use(express.json({ limit: '10mb' }));
 
 // Configure CORS
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    if (req.method === 'OPTIONS') return res.sendStatus(200);
     next();
 });
 
@@ -225,6 +227,191 @@ app.get('/api/initial-images', async (req, res) => {
     }
 });
 
+// --- Archive Magazine API ---
+const fs = require('fs');
+const ARCHIVE_CLOUDINARY_ID = 'archive-magazine-data';
+
+// Helper: fetch archive JSON from Cloudinary raw file
+async function fetchArchiveData() {
+    try {
+        // Use cache-busting param to avoid Cloudinary CDN serving stale data
+        const url = cloudinary.url(ARCHIVE_CLOUDINARY_ID, {
+            resource_type: 'raw',
+            secure: true
+        }) + '?v=' + Date.now();
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Not found');
+        return await response.json();
+    } catch (e) {
+        // Return default empty magazine if not found
+        return {
+            version: 1,
+            title: 'Archive',
+            pages: [
+                {
+                    id: 'page-1',
+                    order: 0,
+                    backgroundColor: '#111111',
+                    elements: []
+                },
+                {
+                    id: 'page-2',
+                    order: 1,
+                    backgroundColor: '#111111',
+                    elements: []
+                }
+            ]
+        };
+    }
+}
+
+// Helper: save archive JSON to Cloudinary as raw file
+function saveArchiveData(data) {
+    return new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+            {
+                resource_type: 'raw',
+                public_id: ARCHIVE_CLOUDINARY_ID,
+                overwrite: true,
+                invalidate: true
+            },
+            (error, result) => {
+                if (error) reject(error);
+                else resolve(result);
+            }
+        );
+        stream.end(Buffer.from(JSON.stringify(data)));
+    });
+}
+
+// Helper: check archive editor password
+function checkArchivePassword(req) {
+    const auth = req.headers.authorization;
+    if (!auth || !auth.startsWith('Bearer ')) return false;
+    const password = auth.slice(7);
+    return password === process.env.ARCHIVE_EDITOR_PASSWORD;
+}
+
+// GET /api/archive - fetch magazine data
+app.get('/api/archive', async (req, res) => {
+    try {
+        const data = await fetchArchiveData();
+        res.json(data);
+    } catch (error) {
+        console.error('Error fetching archive:', error);
+        res.status(500).json({ error: 'Failed to fetch archive data' });
+    }
+});
+
+// PUT /api/archive - save magazine data (password protected)
+app.put('/api/archive', async (req, res) => {
+    if (!checkArchivePassword(req)) {
+        return res.status(401).json({ error: 'Unauthorized' });
+    }
+    try {
+        await saveArchiveData(req.body);
+        res.json({ success: true });
+    } catch (error) {
+        console.error('Error saving archive:', error);
+        res.status(500).json({ error: 'Failed to save archive data' });
+    }
+});
+
+// POST /api/archive/auth - validate editor password
+app.post('/api/archive/auth', (req, res) => {
+    const { password } = req.body;
+    if (password === process.env.ARCHIVE_EDITOR_PASSWORD) {
+        res.json({ success: true });
+    } else {
+        res.status(401).json({ error: 'Invalid password' });
+    }
+});
+
+// GET /api/archive/content-library - return all site content for the editor library
+app.get('/api/archive/content-library', async (req, res) => {
+    try {
+        // Fetch images from Cloudinary
+        const result = await cloudinary.search
+            .expression('folder:website')
+            .with_field('context')
+            .max_results(100)
+            .execute();
+
+        const images = result.resources.map(resource => ({
+            url: cloudinary.url(resource.public_id, {
+                sign_url: true,
+                secure: true,
+                transformation: [{ quality: 'auto' }]
+            }),
+            thumbnailUrl: cloudinary.url(resource.public_id, {
+                sign_url: true,
+                secure: true,
+                transformation: [{ width: 150, height: 150, crop: 'fill' }, { quality: 'auto' }]
+            }),
+            publicId: resource.public_id,
+            width: resource.width,
+            height: resource.height,
+            alt: resource.context?.custom?.title || 'Image'
+        }));
+
+        // Load local essays
+        const essays = [];
+        try {
+            const essayText = fs.readFileSync(path.join(__dirname, 'i-love-gush', 'essay.txt'), 'utf-8');
+            // Split by chapter dividers
+            const chapters = essayText.split(/—{5,}[^—]+—{5,}/g).filter(s => s.trim());
+            const chapterNames = essayText.match(/—{5,}([^—]+)—{5,}/g) || [];
+            chapterNames.forEach((header, i) => {
+                const name = header.replace(/—/g, '').trim();
+                const text = chapters[i] ? chapters[i].trim() : '';
+                if (text) {
+                    essays.push({
+                        id: 'gush-ch-' + (i + 1),
+                        title: 'I Love Gush — ' + name,
+                        chapterName: name,
+                        text: text
+                    });
+                }
+            });
+        } catch (e) {
+            console.log('Could not load local essays:', e.message);
+        }
+
+        res.json({ images, essays });
+    } catch (error) {
+        console.error('Error fetching content library:', error);
+        res.status(500).json({ error: 'Failed to fetch content library' });
+    }
+});
+
+// POST /api/archive/upload - upload image to Cloudinary (password protected)
+app.post('/api/archive/upload', async (req, res) => {
+    if (!checkArchivePassword(req)) {
+        return res.status(401).json({ error: 'Unauthorized' });
+    }
+    try {
+        const { image } = req.body; // base64 data URL
+        const result = await cloudinary.uploader.upload(image, {
+            folder: 'website/archive',
+            resource_type: 'image'
+        });
+        res.json({
+            url: cloudinary.url(result.public_id, {
+                secure: true,
+                transformation: [{ quality: 'auto' }]
+            }),
+            thumbnailUrl: cloudinary.url(result.public_id, {
+                secure: true,
+                transformation: [{ width: 150, height: 150, crop: 'fill' }, { quality: 'auto' }]
+            }),
+            publicId: result.public_id
+        });
+    } catch (error) {
+        console.error('Error uploading image:', error);
+        res.status(500).json({ error: 'Failed to upload image' });
+    }
+});
+
 // Serve livingroom.html at the root
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'livingroom.html'));
@@ -242,7 +429,7 @@ app.use((req, res) => {
     res.status(404).json({ error: 'Not found' });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const HOST = '0.0.0.0';  // This ensures the app listens on all network interfaces
 
 app.listen(PORT, HOST, () => {

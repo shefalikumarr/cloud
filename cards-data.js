@@ -21,6 +21,16 @@ const CARDS_DATA = {
     // Essays
     essays: [
         {
+            id: 'essay-instagram-archive',
+            category: 'essay',
+            order: 1,
+            title: 'How Instagram Ruined My Personal Archive',
+            date: 'March 2026',
+            excerpt: 'Why didn\'t 12-year-old me predict the enshittification of social media?',
+            url: 'https://substack.com/@shef4li/p-192125728',
+            imageId: 'IMG_0163_meze3e'
+        },
+        {
             id: 'essay-panopticon',
             category: 'essay',
             order: 7,
@@ -54,6 +64,18 @@ const CARDS_DATA = {
 
     // Projects
     projects: [
+        {
+            id: 'project-archive',
+            category: 'project',
+            order: 1,
+            title: 'the archive',
+            link: 'archive.html',
+            status: 'in progress',
+            techTags: ['HTML', 'CSS', 'JavaScript'],
+            excerpt: 'A magazine-style archive of my life. Flip through pages of photography, essays, and projects — curated and assembled by hand.',
+            description: 'An interactive magazine built from scratch. Browse as a two-page spread or edit in the built-in magazine creator.',
+            imageId: 'DSC02974_ojpe0v'
+        },
         {
             id: 'project-you-have-time',
             category: 'project',
@@ -241,9 +263,11 @@ const CardRenderers = {
             .map(tag => `<span class="tech-tag">${tag}</span>`).join('');
         
         if (variant === 'tile') {
-            const titleHtml = project.url 
-                ? `<a href="${project.url}" target="_blank">${project.title}</a>`
-                : project.title;
+            const titleHtml = project.link
+                ? `<a href="${project.link}">${project.title}</a>`
+                : project.url
+                    ? `<a href="${project.url}" target="_blank">${project.title}</a>`
+                    : project.title;
             
             // If project has an image, render as photo-style tile with background
             if (project.imageId) {
@@ -272,10 +296,12 @@ const CardRenderers = {
             `;
         } else if (variant === 'full') {
             const allTagsHtml = project.techTags.map(tag => `<span class="tech-tag">${tag}</span>`).join('');
-            const titleHtml = project.url 
-                ? `<a href="${project.url}" target="_blank">${project.title}</a>`
-                : project.title;
-            
+            const titleHtml = project.link
+                ? `<a href="${project.link}">${project.title}</a>`
+                : project.url
+                    ? `<a href="${project.url}" target="_blank">${project.title}</a>`
+                    : project.title;
+
             // If project has an image, include it in full view
             const imageHtml = project.imageId 
                 ? `<img src="${getCloudinaryUrl(project.imageId, 800)}" alt="${project.title}" class="project-image">`

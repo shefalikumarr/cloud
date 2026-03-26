@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>archive editor - shefali</title>
+    <link rel="stylesheet" href="archive-editor.css">
+</head>
+<body>
+    <!-- Password Gate -->
+    <div class="password-overlay" id="password-overlay">
+        <div class="password-box">
+            <h2>archive editor</h2>
+            <p>enter password to continue</p>
+            <input type="password" id="password-input" placeholder="password" autocomplete="off">
+            <button id="password-submit">enter</button>
+            <p class="password-error" id="password-error"></p>
+        </div>
+    </div>
+
+    <!-- Editor -->
+    <div class="editor-layout" id="editor-layout" style="display:none;">
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <div class="toolbar-left">
+                <a href="archive.html" class="toolbar-btn toolbar-back">← view</a>
+                <button class="toolbar-btn" id="btn-save" title="Save (Ctrl+S)">save</button>
+                <span class="save-status" id="save-status"></span>
+            </div>
+            <div class="toolbar-center">
+                <button class="toolbar-btn" id="btn-add-page" title="Add page after current">+ page</button>
+                <button class="toolbar-btn toolbar-danger" id="btn-delete-page" title="Delete current page">− page</button>
+                <label class="toolbar-label">
+                    bg:
+                    <input type="color" id="page-bg-color" value="#111111" title="Page background color">
+                </label>
+            </div>
+            <div class="toolbar-right">
+                <button class="toolbar-btn" id="btn-undo" title="Undo (Ctrl+Z)">undo</button>
+                <button class="toolbar-btn" id="btn-bring-front" title="Bring selected to front">↑ front</button>
+                <button class="toolbar-btn" id="btn-send-back" title="Send selected to back">↓ back</button>
+                <button class="toolbar-btn toolbar-danger" id="btn-delete-el" title="Delete selected element">delete</button>
+            </div>
+        </div>
+
+        <div class="editor-panels">
+            <!-- Left Panel: Content Library -->
+            <div class="panel-left">
+                <div class="library-tabs">
+                    <button class="lib-tab active" data-tab="images">images</button>
+                    <button class="lib-tab" data-tab="content">content</button>
+                    <button class="lib-tab" data-tab="shapes">shapes</button>
+                </div>
+                <div class="library-content">
+                    <!-- Images tab -->
+                    <div class="lib-pane active" id="tab-images">
+                        <div class="upload-area">
+                            <label class="upload-btn">
+                                + upload image
+                                <input type="file" id="upload-input" accept="image/*" style="display:none">
+                            </label>
+                        </div>
+                        <div class="image-grid" id="image-grid">
+                            <p class="lib-loading">loading images...</p>
+                        </div>
+                    </div>
+                    <!-- Content tab -->
+                    <div class="lib-pane" id="tab-content">
+                        <div class="content-items" id="content-items"></div>
+                    </div>
+                    <!-- Shapes tab -->
+                    <div class="lib-pane" id="tab-shapes">
+                        <div class="shape-grid">
+                            <button class="shape-btn" data-shape="rectangle" title="Rectangle">
+                                <svg viewBox="0 0 40 40"><rect x="4" y="8" width="32" height="24" fill="none" stroke="#fff" stroke-width="2"/></svg>
+                            </button>
+                            <button class="shape-btn" data-shape="circle" title="Circle">
+                                <svg viewBox="0 0 40 40"><ellipse cx="20" cy="20" rx="16" ry="16" fill="none" stroke="#fff" stroke-width="2"/></svg>
+                            </button>
+                            <button class="shape-btn" data-shape="triangle" title="Triangle">
+                                <svg viewBox="0 0 40 40"><polygon points="20,4 4,36 36,36" fill="none" stroke="#fff" stroke-width="2"/></svg>
+                            </button>
+                            <button class="shape-btn" data-shape="line" title="Line">
+                                <svg viewBox="0 0 40 40"><line x1="4" y1="20" x2="36" y2="20" stroke="#fff" stroke-width="2"/></svg>
+                            </button>
+                        </div>
+                        <div class="text-tools">
+                            <button class="shape-btn wide" id="btn-add-heading">+ heading</button>
+                            <button class="shape-btn wide" id="btn-add-body">+ body text</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center Panel: Canvas -->
+            <div class="panel-center">
+                <div class="canvas-area">
+                    <div class="spread-editor">
+                        <div class="editor-page" id="editor-page-left" data-side="left"></div>
+                        <div class="editor-page" id="editor-page-right" data-side="right"></div>
+                    </div>
+                </div>
+                <div class="page-strip" id="page-strip"></div>
+            </div>
+
+            <!-- Right Panel: Properties -->
+            <div class="panel-right" id="panel-right">
+                <div class="props-empty">select an element to edit properties</div>
+                <div class="props-content" id="props-content" style="display:none;">
+                    <h3 class="props-title">properties</h3>
+                    <div class="prop-group">
+                        <label>x <input type="number" id="prop-x" step="1"></label>
+                        <label>y <input type="number" id="prop-y" step="1"></label>
+                    </div>
+                    <div class="prop-group">
+                        <label>w <input type="number" id="prop-w" step="1" min="10"></label>
+                        <label>h <input type="number" id="prop-h" step="1" min="10"></label>
+                    </div>
+                    <!-- Text properties -->
+                    <div class="prop-section" id="props-text" style="display:none;">
+                        <div class="prop-group">
+                            <label>size <input type="number" id="prop-font-size" step="1" min="8" max="200"></label>
+                            <label>color <input type="color" id="prop-text-color"></label>
+                        </div>
+                        <div class="prop-group">
+                            <label>weight
+                                <select id="prop-font-weight">
+                                    <option value="normal">normal</option>
+                                    <option value="bold">bold</option>
+                                    <option value="lighter">light</option>
+                                </select>
+                            </label>
+                            <label>align
+                                <select id="prop-text-align">
+                                    <option value="left">left</option>
+                                    <option value="center">center</option>
+                                    <option value="right">right</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- Shape properties -->
+                    <div class="prop-section" id="props-shape" style="display:none;">
+                        <div class="prop-group">
+                            <label>fill <input type="color" id="prop-fill"></label>
+                            <label>stroke <input type="color" id="prop-stroke"></label>
+                        </div>
+                        <div class="prop-group">
+                            <label>stroke w <input type="number" id="prop-stroke-width" step="1" min="0" max="20"></label>
+                            <label>opacity <input type="range" id="prop-opacity" min="0" max="1" step="0.1"></label>
+                        </div>
+                    </div>
+                    <!-- Image properties -->
+                    <div class="prop-section" id="props-image" style="display:none;">
+                        <div class="prop-group">
+                            <label>opacity <input type="range" id="prop-img-opacity" min="0" max="1" step="0.1" value="1"></label>
+                        </div>
+                        <div class="prop-group" style="grid-template-columns:1fr;">
+                            <label class="lock-aspect-label">
+                                <input type="checkbox" id="prop-lock-aspect" checked>
+                                lock aspect ratio
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="cards-data.js"></script>
+    <script src="archive-editor.js"></script>
+    <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
+</body>
+</html>
