@@ -111,6 +111,18 @@ const CARDS_DATA = {
             excerpt: 'A no strings attached image stretcher for squeezing or stretching images to any dimensions. Same philosophy as the resizer - no storage, no ads, no tracking.',
             description: 'A no strings attached image stretcher for squeezing or stretching images to any dimensions. Same philosophy as the resizer - no storage, no ads, no tracking.',
             imageId: 'Screenshot_2026-01-29_at_12.09.52_AM_pltxrq'
+        },
+        {
+            id: 'project-touchdesigner',
+            category: 'project',
+            order: 5,
+            title: 'touchdesigner',
+            link: 'touchdesigner.html',
+            status: 'ongoing',
+            techTags: ['TouchDesigner', 'GLSL', 'Visuals'],
+            excerpt: 'Having fun playing around with touchdesigner to glitch out my life.',
+            description: 'Having fun playing around with touchdesigner to glitch out my life.',
+            imageId: 'DSC03104_us8q8j'
         }
     ],
 
@@ -197,6 +209,25 @@ function getCloudinaryUrl(imageId, width = 600) {
     return `https://res.cloudinary.com/djfrhmsgw/image/upload/q_auto,w_${width}/${imageId}`;
 }
 
+// Collect all real imageIds from CARDS_DATA (for 'random' resolution)
+function getAllImageIds() {
+    const ids = [];
+    if (CARDS_DATA.about && CARDS_DATA.about.imageId) ids.push(CARDS_DATA.about.imageId);
+    CARDS_DATA.essays.forEach(e => { if (e.imageId) ids.push(e.imageId); });
+    CARDS_DATA.projects.forEach(p => { if (p.imageId && p.imageId !== 'random') ids.push(p.imageId); });
+    CARDS_DATA.photos.forEach(p => { if (p.imageId) ids.push(p.imageId); });
+    return ids;
+}
+
+// Resolve 'random' sentinel to an actual imageId; pass through real ids
+function resolveImageId(imageId) {
+    if (imageId === 'random') {
+        const pool = getAllImageIds();
+        return pool[Math.floor(Math.random() * pool.length)];
+    }
+    return imageId;
+}
+
 // Render functions for different card types
 const CardRenderers = {
     renderAboutCard(data) {
@@ -261,17 +292,19 @@ const CardRenderers = {
     renderProjectCard(project, variant = 'tile') {
         const techTagsHtml = project.techTags.slice(0, variant === 'tile' ? 3 : project.techTags.length)
             .map(tag => `<span class="tech-tag">${tag}</span>`).join('');
-        
+
+        const resolvedImageId = resolveImageId(project.imageId);
+
         if (variant === 'tile') {
             const titleHtml = project.link
                 ? `<a href="${project.link}">${project.title}</a>`
                 : project.url
                     ? `<a href="${project.url}" target="_blank">${project.title}</a>`
                     : project.title;
-            
+
             // If project has an image, render as photo-style tile with background
-            if (project.imageId) {
-                const imageUrl = getCloudinaryUrl(project.imageId);
+            if (resolvedImageId) {
+                const imageUrl = getCloudinaryUrl(resolvedImageId);
                 return `
                     <article class="content-tile tile-project tile-project-with-image" data-category="project" data-order="${project.order}" style="background-image: url('${imageUrl}'); background-size: cover; background-position: center;">
                         <span class="tile-tag tag-project">project</span>
@@ -303,12 +336,12 @@ const CardRenderers = {
                     : project.title;
 
             // If project has an image, include it in full view
-            const imageHtml = project.imageId 
-                ? `<img src="${getCloudinaryUrl(project.imageId, 800)}" alt="${project.title}" class="project-image">`
+            const imageHtml = resolvedImageId
+                ? `<img src="${getCloudinaryUrl(resolvedImageId, 800)}" alt="${project.title}" class="project-image">`
                 : '';
-            
+
             return `
-                <article class="project-card${project.imageId ? ' project-card-with-image' : ''}">
+                <article class="project-card${resolvedImageId ? ' project-card-with-image' : ''}">
                     ${imageHtml}
                     <div class="project-card-content">
                         <h2 class="project-title">${titleHtml} <span class="project-status">${project.status}</span></h2>
